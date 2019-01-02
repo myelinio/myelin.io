@@ -92,8 +92,8 @@ custom_css = ["css/custom.css"]
     
     # footer
     [params.footer]
-        copyright = "Themefisher Team"
-        copyrightURL = "http://www.themefisher.com"
+        copyright = "Myelin Limited"
+        copyrightURL = "http://myelin.io"
 
         # social Icons
         [[params.footer.socialIcon]]
