@@ -1,47 +1,12 @@
-#title = "Notre-Dame de Paris"
-#baseURL = "https://example.com"
-#languageCode = "en-us"
-#theme = "gohugo-theme-ananke"
-#
-#MetaDataFormat = "yaml"
-#DefaultContentLanguage = "en"
-#SectionPagesMenu = "main"
-#Paginate = 3 # this is set low for demonstrating with dummy content. Set to a higher number
-#googleAnalytics = ""
-#enableRobotsTXT = true
-#
-#[sitemap]
-#  changefreq = "monthly"
-#  priority = 0.5
-#  filename = "sitemap.xml"
-#
-#[params]
-#  favicon = ""
-#  description = "The last theme you'll ever need. Maybe."
-#  facebook = ""
-#  twitter = "https://twitter.com/GoHugoIO"
-#  instagram = ""
-#  youtube = ""
-#  github = ""
-#  gitlab = ""
-#  linkedin = ""
-#  # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
-#  background_color_class = "bg-black"
-#  featured_image = "/images/gohugo-default-sample-hero-image.jpg"
-#  recent_posts_number = 2
-
-
-
-
-baseURL = "http://localhost:8080/"
+baseURL = "http://myelin.io/"
 languageCode = "en-us"
 title = "Meghna | Responsive Multipurpose Parallax HTML5 Template"
 theme = "meghna-hugo"
-staticDir = "themes/meghna-hugo/exampleSite/static"
+
 # Menu
 [menu]
     [[menu.nav]]
-    name = "About Us2"
+    name = "About Us"
     URL = "about"
     weight = 2
 
@@ -124,7 +89,7 @@ custom_css = ["css/custom.css"]
         title = "Cups of Coffee"
         icon = "tf-ion-coffee"
         count = "2500"
-
+    
     # footer
     [params.footer]
         copyright = "Themefisher Team"
@@ -134,27 +99,27 @@ custom_css = ["css/custom.css"]
         [[params.footer.socialIcon]]
         icon = "tf-ion-social-facebook"
         url = "#"
-
+        
         [[params.footer.socialIcon]]
         icon = "tf-ion-social-twitter"
         url = "#"
-
+        
         [[params.footer.socialIcon]]
         icon = "tf-ion-social-google-outline"
         url = "#"
-
+        
         [[params.footer.socialIcon]]
         icon = "tf-ion-social-youtube"
         url = "#"
-
+        
         [[params.footer.socialIcon]]
         icon = "tf-ion-social-linkedin"
         url = "#"
-
+        
         [[params.footer.socialIcon]]
         icon = "tf-ion-social-dribbble-outline"
         url = "#"
-
+        
         [[params.footer.socialIcon]]
         icon = "tf-ion-social-pinterest-outline"
         url = "#"
