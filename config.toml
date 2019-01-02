@@ -15,20 +15,20 @@ theme = "meghna-hugo"
     URL = "services"
     weight = 3
 
-    [[menu.nav]]
-    name = "Portfolio"
-    URL = "portfolio"
-    weight = 4
+#    [[menu.nav]]
+#    name = "Portfolio"
+#    URL = "portfolio"
+#    weight = 4
 
     [[menu.nav]]
     name = "Team"
     URL = "our-team"
     weight = 5
 
-    [[menu.nav]]
-    name = "Pricing"
-    URL = "pricing"
-    weight = 6
+#    [[menu.nav]]
+#    name = "Pricing"
+#    URL = "pricing"
+#    weight = 6
 
     [[menu.nav]]
     name = "Blog"
@@ -52,9 +52,9 @@ custom_css = ["css/custom.css"]
     enable = true
     bgImage = "images/slider/hero-area.jpg"
     icon = "tf-ion-play"
-    heading = "Experience the new reality"
+    heading = "Declarative Machine Learning on Kubernetes"
     content= "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, excepturi. At recusandae sit perferendis autem,iste tempora nostrum numquam sapiente!"
-    btn = true
+    btn = false
     btnText="Explore Us"
     btnURL="#services"
 
