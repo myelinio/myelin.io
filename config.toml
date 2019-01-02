@@ -41,7 +41,7 @@ staticDir = "themes/meghna-hugo/exampleSite/static"
 # Menu
 [menu]
     [[menu.nav]]
-    name = "About Us"
+    name = "About Us2"
     URL = "about"
     weight = 2
 
