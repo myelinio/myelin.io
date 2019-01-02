@@ -4,6 +4,7 @@
 vendor/
 dist/
 public/
+resources/
 # delve debug binaries
 cmd/**/debug
 hack/**/debug
