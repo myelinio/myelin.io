@@ -1,6 +1,6 @@
 baseURL = "http://myelin.io/"
 languageCode = "en-us"
-title = "Meghna | Responsive Multipurpose Parallax HTML5 Template"
+title = "Myelin"
 theme = "meghna-hugo"
 
 # Menu
@@ -52,8 +52,8 @@ custom_css = ["css/custom.css"]
     enable = true
     bgImage = "images/slider/hero-area.jpg"
     icon = "tf-ion-play"
-    heading = "Declarative Machine Learning on Kubernetes"
-    content= "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, excepturi. At recusandae sit perferendis autem,iste tempora nostrum numquam sapiente!"
+    heading = "Myelin"
+    content= "Myelin is a native Kubernetes end to end machine learning framework. It enables data scientists and engineers to deploy, manage and monitor machine learning models."
     btn = false
     btnText="Explore Us"
     btnURL="#services"
