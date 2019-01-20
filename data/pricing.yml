@@ -2,8 +2,8 @@ enable : false
 heading : Our Greatest
 headingSpan : Plans
 pricingTable :
-  - title : Free
-    price : $99
+  - title : Open Source
+    price : $0
     time : month
     btnURL : #
     btnText : Signup

@@ -6,12 +6,12 @@ theme = "meghna-hugo"
 # Menu
 [menu]
     [[menu.nav]]
-    name = "About Us"
+    name = "About"
     URL = "about"
     weight = 2
 
     [[menu.nav]]
-    name = "Service"
+    name = "Services"
     URL = "services"
     weight = 3
 
@@ -20,10 +20,10 @@ theme = "meghna-hugo"
 #    URL = "portfolio"
 #    weight = 4
 
-    [[menu.nav]]
-    name = "Team"
-    URL = "our-team"
-    weight = 5
+#    [[menu.nav]]
+#    name = "Team"
+#    URL = "our-team"
+#    weight = 5
 
 #    [[menu.nav]]
 #    name = "Pricing"
@@ -43,32 +43,35 @@ theme = "meghna-hugo"
 # Site params
 [params]
 home= "Home"
-logo = "images/logo.png"
+logo = "images/logov2.png"
 gmapAPI = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBI14J_PNWVd-m0gnUBkjmhoQyNyd7nllA"
 custom_css = ["css/custom.css"]
 
     # Banner Section
     [params.banner]
     enable = true
-    bgImage = "images/slider/hero-area.jpg"
-    icon = "tf-ion-play"
+    bgImage = "images/top/background.jpg"
     heading = "Myelin"
     content= "Myelin is a native Kubernetes end to end machine learning framework. It enables data scientists and engineers to deploy, manage and monitor machine learning models."
     btn = false
     btnText="Explore Us"
     btnURL="#services"
 
+    [params.banner.icon]
+    enable = false
+    icon = "tf-ion-play"
+
     # call to action
     [params.cta]
-    enable = true
-    title = "Great Design & Incredible Features"
-    content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis tenetur odio impedit incidunt? Omnis accusantium ea reiciendis, fugit commodi nostrum."
-    btnURL = "#"
-    btnText = "Start a project with us"
+    enable = false
+    title = "Would you like to know more?"
+    content = ""
+    btnURL = "#contact-us"
+    btnText = "Arrange a demo with us"
 
     # counter
     [params.counter]
-    enable = true
+    enable = false
     bgImage = "images/backgrounds/bg-1.jpg"
         [[params.counter.counterItem]]
         title = "Happy Clients"
@@ -104,22 +107,22 @@ custom_css = ["css/custom.css"]
         icon = "tf-ion-social-twitter"
         url = "#"
         
-        [[params.footer.socialIcon]]
-        icon = "tf-ion-social-google-outline"
-        url = "#"
+#        [[params.footer.socialIcon]]
+#        icon = "tf-ion-social-google-outline"
+#        url = "#"
         
-        [[params.footer.socialIcon]]
-        icon = "tf-ion-social-youtube"
-        url = "#"
+#        [[params.footer.socialIcon]]
+#        icon = "tf-ion-social-youtube"
+#        url = "#"
         
         [[params.footer.socialIcon]]
         icon = "tf-ion-social-linkedin"
         url = "#"
         
-        [[params.footer.socialIcon]]
-        icon = "tf-ion-social-dribbble-outline"
-        url = "#"
+#        [[params.footer.socialIcon]]
+#        icon = "tf-ion-social-dribbble-outline"
+#        url = "#"
         
-        [[params.footer.socialIcon]]
-        icon = "tf-ion-social-pinterest-outline"
-        url = "#"
+#        [[params.footer.socialIcon]]
+#        icon = "tf-ion-social-pinterest-outline"
+#        url = "#"
