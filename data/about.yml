@@ -6,10 +6,10 @@ aboutItem :
   title : Cloud native
   content : Myelin is designed from ground up to run on Kuberentes.
 
-- icon : tf-ion-ios-loop-strong
+- icon : tf-ion-ios-medkit-outline
   title : Self healing deployments
-  content : Machine learning deployments are monitored and recovered if its performance deviates from what is required.
+  content : Machine learning deployments are monitored and restored if their performance deteriorate.
 
-- icon : tf-anchor2
+- icon : tf-ion-android-refresh
   title : End to end
   content : Myelin provides tools to train, deploy and monitor your algorithm.
