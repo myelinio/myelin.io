@@ -6,7 +6,7 @@ image: images/blog/movie-recommendation.jpg
 ---
 
 This blog post builds a simple movie recommender demo,
-and explains how to deploy it with `Myelin`
+and explains how to deploy it with *Myelin*.
 
 The deployment contains three steps (we called these tasks):
 
@@ -29,7 +29,7 @@ The first step is to define all the packages the code will be using.
 In this case this is shared between all three steps, but it is possible to have
 different set of packages used for each step.
 
-`requirements.txt` contains some basic Python packages:
+*requirements.txt* contains some basic Python packages:
 ```
 numpy==1.16.0rc1
 h5py==2.8.0
@@ -44,12 +44,11 @@ myelin==0.0.6
 ```
 
 
-`preprocess.py` downloads the data and save it to the shared folder in a format
+*preprocess.py* downloads the data and save it to the shared folder in a format
 the training process expects it. Full code can be founds [here.](https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_demo/preprocess.py)
 
 We need an image that has the necessary tools for this step.
-
-This is defined in `Dockerfile.preprocess`:
+This is defined in *Dockerfile.preprocess*:
 ```
 FROM python:3.6
 
@@ -63,7 +62,7 @@ COPY ./preprocess.py /work/preprocess.py
 CMD python preprocess.py
 ```
 
-This executes `preprocess.py` and saves the data in the shared folder.
+This executes *preprocess.py* and saves the data in the shared folder.
 
 In the Myelin deployment definition, only have to define the following task:
 ```yaml
