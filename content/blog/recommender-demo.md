@@ -10,9 +10,10 @@ and explains how to deploy it with *Myelin*.
 
 The deployment contains three steps (we called these tasks):
 
-- Pre-processing step: download the Movielens data, uncompress and put it in a shared folder
+- **Pre-processing step:** download the Movielens data, uncompress and put it in a shared folder
 - Training step: Train a Keras recommender model
 - Deployment step: Deploy a REST API to serve the model
+
 
 In addition Myelin provides sensors that makes decisions on how to proceed between tasks.
 We will define three sensors:
