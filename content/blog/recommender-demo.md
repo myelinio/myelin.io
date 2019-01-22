@@ -5,23 +5,25 @@ author: Tamas Jambor
 image: images/blog/movie-recommendation.jpg
 ---
 
-This blog post builds a simple movie recommender demo,
+This blog post builds a simple movie recommender demo
 and explains how to deploy it with *Myelin*.
+
+<!--more-->
 
 The deployment contains three steps (we called these tasks):
 
 - **Pre-processing step:** download the Movielens data, uncompress and put it in a shared folder
-- Training step: Train a Keras recommender model
-- Deployment step: Deploy a REST API to serve the model
+- **Training step:** Train a Keras recommender model
+- **Deployment step:** Deploy a REST API to serve the model
 
 
 In addition Myelin provides sensors that makes decisions on how to proceed between tasks.
 We will define three sensors:
 
-- Train on start: a sensor that executes tasks for the first time
-- Deployment decision maker: a sensor that makes a decision whether the train model
+- **Train on start:** a sensor that executes tasks for the first time
+- **Deployment decision maker:** a sensor that makes a decision whether the train model
 can be deployed
-- Post deployment decision maker: a sensor that monitors the deployed model
+- **Post deployment decision maker:** a sensor that monitors the deployed model
 and decides to retrain it when the performance drops
 
 ### Preprocessing step:
