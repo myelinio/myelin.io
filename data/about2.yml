@@ -1,13 +1,13 @@
-enable : false
-image : images/about/about-business-man.jpg
-title : We’re A Digital Design Agency.
-description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam tempora itaque, autem dolores culpa cum mollitia voluptate nesciunt voluptatibus quasi.
-description2 : Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam tempora itaque, autem dolores culpa cum mollitia voluptate nesciunt voluptatibus quasi. Aliquam tempora itaque, autem dolores culpa cum mollitia voluptate nesciunt voluptatibus quasi.
+enable : true
+image : images/about/blackboard-business-chalkboard-355988.jpg
+title : Introducing declarative machine learning
+description : Myelin was inspired by the philosophy of Kubenetes, where the user describes a desired state of a machine learning deploment and Myelin works out what is the best way to achieve that state.
+description2 : In a simple case, the desired state might include a single model that is trained and deployed, serving accurate predictions. When the model performance drops, Myelin retrains the model and replaces the inaccurate one.
 aboutItem : 
   - icon : tf-circle-compass
-    title : SEO Optimized
-    content : Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus consectetur dolores repellendus eos saepe
+    title : Automated deployments
+    content : The tool is designed to manage machine learning deployments without human intervention.
     
   - icon : tf-hotairballoon
-    title : Easy Customization
-    content : Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus consectetur dolores repellendus eos saepe
+    title : Advanced scenarios
+    content : Myelin covers a wide range of scenarios to allow users to express the desired state of complex deployments.
