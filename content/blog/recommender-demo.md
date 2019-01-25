@@ -2,7 +2,7 @@
 title: "Myelin Movie Recommender Demo"
 date: 2019-01-19T14:51:12+06:00
 author: Tamas Jambor
-image: images/blog/movie-recommendation.jpg
+image: images/blog/movie-recommendationv2.jpg
 ---
 
 This blog post builds a simple movie recommender demo
