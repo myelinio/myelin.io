@@ -11,10 +11,10 @@ googleAnalytics = "UA-132898010-1"
     URL = "about"
     weight = 2
 
-    [[menu.nav]]
-    name = "Services"
-    URL = "services"
-    weight = 3
+#    [[menu.nav]]
+#    name = "Services"
+#    URL = "services"
+#    weight = 3
 
 #    [[menu.nav]]
 #    name = "Portfolio"
@@ -55,7 +55,7 @@ custom_css = ["css/custom.css"]
     # Banner Section
     [params.banner]
     enable = true
-    bgImage = "images/top/backgroundv2.jpg"
+    bgImage = "images/top/backgroundv3.jpg"
     heading = "Myelin"
     content= "Myelin is a Kubernetes native end to end machine learning framework. It enables data scientists and engineers to deploy, manage and monitor machine learning models."
     btn = false
