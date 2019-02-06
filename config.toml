@@ -104,11 +104,11 @@ custom_css = ["css/custom.css"]
 
         # social Icons
         [[params.footer.socialIcon]]
-        icon = "tf-ion-social-facebook"
+        icon = "tf-ion-social-facebook-outline"
         url = "https://www.facebook.com/Myelinio-386514488779281"
         
         [[params.footer.socialIcon]]
-        icon = "tf-ion-social-twitter"
+        icon = "tf-ion-social-twitter-outline"
         url = "https://twitter.com/myelinio"
         
 #        [[params.footer.socialIcon]]
@@ -120,8 +120,12 @@ custom_css = ["css/custom.css"]
 #        url = "#"
         
         [[params.footer.socialIcon]]
-        icon = "tf-ion-social-linkedin"
+        icon = "tf-ion-social-linkedin-outline"
         url = "https://www.linkedin.com/company/myelinio/"
+
+        [[params.footer.socialIcon]]
+        icon = "tf-ion-social-github-outline"
+        url = "https://github.com/myelinio/"
         
 #        [[params.footer.socialIcon]]
 #        icon = "tf-ion-social-dribbble-outline"
