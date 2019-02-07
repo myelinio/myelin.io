@@ -10,12 +10,11 @@ and explains how to deploy it with *Myelin*.
 
 <!--more-->
 
-The deployment contains three steps (we called these tasks):
+The deployment contains three steps (we call these tasks):
 
 - **Pre-processing step:** download the Movielens data, uncompress and put it in a shared folder
 - **Training step:** Train a Keras recommender model
 - **Deployment step:** Deploy a REST API to serve the model
-
 
 In addition Myelin provides sensors that makes decisions on how to proceed between tasks.
 We will define three sensors:
@@ -48,7 +47,7 @@ myelin==0.0.6
 
 
 *preprocess.py* downloads the data and save it to the shared folder in a format
-the training process expects it. Full code can be founds [here.](https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_demo/preprocess.py)
+the training process expects it. Full code can be found [here.](https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_demo/preprocess.py)
 
 We need an image that has the necessary tools for this step.
 This is defined in *Dockerfile.preprocess*:
