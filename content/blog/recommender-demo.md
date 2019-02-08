@@ -89,11 +89,11 @@ that gets executed in the same order they are defined.
 
 ### Preprocessing (task)
 
-After the artifacts and the shared folder, the next step is to define all
-the tasks this deployment needs. The first one is the preprocessing step.
-It needs a set of packages that the code will be using.
-In this case this is shared between all three steps, but it is possible to have
-different set used for each step.
+The first compute step is the preprocessing step, this downloads the Movielens
+data to the shared folder and puts it in a format the training steps needs.
+This taks needs a set of packages that the code will be using.
+In this case this is shared between the preprocessing and training steps, but it is possible to have
+different set of requirements used in each step.
 
 *requirements.txt* contains some basic Python packages:
 ```
@@ -217,7 +217,7 @@ define a set of condition that are required to progress to the next step.
 
 ### Deployment (task)
 
-After the model is trained and the condition to deploy is met. Myelin will
+After the model is trained and the condition to deploy is met, Myelin will
 run the deployment step. This step is slightly different from the previous
 ones since the deployment needs to be exposed through an API:
 
@@ -241,6 +241,10 @@ ones since the deployment needs to be exposed through an API:
 In this case we don't need to define a *Dockerfile* as Myelin provides a
 builder image that exposes the code through an API using an S2I builder.
 
+For S2I, we need to define the following:
+- *.s2i/environment* the environment variables used in the container
+- *RNNRecommender.py* has the code to load and define the predict method
+
 ### Post deployment decision maker (sensor)
 
 This sensor monitors the deployment and makes a decision to execute tasks
@@ -259,6 +263,6 @@ This sensor monitors the deployment and makes a decision to execute tasks
       trainer: TrainMyelinRecommender
 ```
 
-In this definition we define this sensor to retrain the model (run data preprocessing
+In this definition the sensor would retrain the model (run data preprocessing
 and training) if accuracy drops below 0.9. Once this condition is true
 it run the two *tasks* defined redeploys the model.
