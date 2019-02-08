@@ -265,4 +265,4 @@ This sensor monitors the deployment and makes a decision to execute tasks
 
 In this definition the sensor would retrain the model (run data preprocessing
 and training) if accuracy drops below 0.9. Once this condition is true
-it run the two *tasks* defined redeploys the model.
+it runs the two tasks to redeploy the model.
