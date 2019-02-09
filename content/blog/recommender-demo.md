@@ -10,7 +10,7 @@ and explains how to deploy it with *Myelin*.
 
 <!--more-->
 
-Full code can be found [here.](https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_demo/preprocess.py)
+Full code can be found [here.](https://github.com/myelinio/myelin-examples/tree/master/recommender_demo)
 
 ### Basic structure
 
@@ -20,7 +20,7 @@ The deployment contains three steps (we call these tasks):
 - **Training step:** Train a Keras recommender model
 - **Deployment step:** Deploy a REST API to serve the model
 
-In addition Myelin provides sensors that makes decisions on how to proceed between tasks.
+In addition Myelin provides sensors that make decisions on how to proceed between tasks.
 We will define three sensors:
 
 - **Train on start:** a sensor that executes tasks for the first time
