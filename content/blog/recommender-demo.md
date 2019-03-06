@@ -29,6 +29,23 @@ and explains how to deploy it with *Myelin*.
     ```bash
     myelin submit recommender-demo.yaml -n $NAMESPACE --watch
     ```
+    
+- Get recommendation
+    
+    ```bash
+    NAMESPACE=myelin
+
+    #Get the proxy name (if only one model is deployed)
+    PROXY_NAME=$(myelin get deploy -n $NAMESPACE ml-recommender-all -o json | jq -r '.[].proxyName')
+    #Get url of the load balancer
+    HOST_NAME=$(kubectl get service -n  $NAMESPACE istio-ingressgateway -o jsonpath={.status.loadBalancer.ingress[0].hostname})
+    PROXY_URL=http://${HOST_NAME}:80/${PROXY_NAME}/predict
+    
+    DATA='{"data": {"ndarray": [[10, 3], [10, 4]]}}'
+    curl -v -d "${DATA}" "${PROXY_URL}"
+    ```
+    
+    This returns a rating for user 10, item 3 and user 10, item 4.
 
 Full code can be found [here.](https://github.com/myelinio/myelin-examples/tree/master/recommender_demo)
 
