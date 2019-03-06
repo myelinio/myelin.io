@@ -10,6 +10,26 @@ and explains how to deploy it with *Myelin*.
 
 <!--more-->
 
+### TL;DR
+
+- Checkout the example code
+    ```bash
+    NAMESPACE=myelin
+    git clone https://github.com/myelinio/myelin-examples.git
+    cd myelin-examples/recommender_demo/
+    ```
+     
+- Create the deployment 
+    ```bash
+    kubectl create -f recommender-demo.yaml -n $NAMESPACE
+    ```
+    
+    or use Myelin cli 
+    
+    ```bash
+    myelin submit recommender-demo.yaml -n $NAMESPACE --watch
+    ```
+
 Full code can be found [here.](https://github.com/myelinio/myelin-examples/tree/master/recommender_demo)
 
 ### Basic structure
@@ -68,7 +88,7 @@ flexVolume:
   fsType: ceph
   options:
     fsName: myfs # name of the filesystem specified in the filesystem CRD.
-    clusterNamespace: myelin-uat # namespace where the Rook cluster is deployed
+    clusterNamespace: myelin # namespace where the Rook cluster is deployed
 ```
 
 
@@ -78,11 +98,10 @@ To kick off the process we need to define a sensor that executes the first task:
 ```
 - name: TrainOnStart
   tasks:
-    - name: DataPrepMyelinRecommender
-      type: Generic
-    - name: TrainMyelinRecommender
-      type: ModelTrainer
-      trainer: TrainMyelinRecommender
+    - resourceExecutor:
+        task: DataPrepMyelinRecommender
+    - trainer:
+        task: TrainMyelinRecommender
 ```
 This defines the workflow that contains two tasks (data prep and training)
 that gets executed in the same order they are defined.
@@ -106,7 +125,7 @@ keras==1.2.2
 six>=1.11.0
 tensorflow==1.5.0
 Theano==1.0.4
-myelin==0.0.6
+myelin==0.0.10
 ```
 
 *preprocess.py* downloads the data and save it to the shared folder in a format
@@ -132,13 +151,13 @@ This executes *preprocess.py* and saves the data in the shared folder.
 In the Myelin deployment definition, only have to define the following task:
 ```yaml
 - name: DataPrepMyelinRecommender
-  type: Generic
-
-  imageBuild:
-    type: Docker
-    repositoryName: preprocess-myelin-recommender
-    buildLocation: /src/myelin_recommender
-    dockerfile: Dockerfile.preprocess
+  container:
+    imageBuild:
+      repositoryName: preprocess-myelin-recommender
+      artifact: rec-source
+      buildLocation: /src/recommender_demo
+      dockerfile:
+        path: Dockerfile.preprocess
 ```
 
 This task contains the definition of the image and its corresponding repository.
@@ -170,16 +189,15 @@ CMD python -m myelin_recommender.train
 This executes *myelin_recommender.train* package and saves the model in the shared folder.
 
 Followed by the task definition:
-```
+```yaml
 - name: TrainMyelinRecommender
-  type: Trainer
-  image: registry-intl.eu-central-1.aliyuncs.com/myelinproj/train-myelin-recommender
-
-  imageBuild:
-    type: Docker
-    repositoryName: train-myelin-recommender
-    buildLocation: /src/myelin_recommender
-    dockerfile: Dockerfile.train
+  train:
+    imageBuild:
+      repositoryName: train-myelin-recommender
+      artifact: rec-source
+      buildLocation: /src/recommender_demo
+      dockerfile:
+        path: Dockerfile.train
 ```
 
 As before this task build the image and executes it afterward.
@@ -201,10 +219,11 @@ the trained model is worth deploying:
       condition: "{{mnist_train_accuracy}} > 0.95"
       task: TrainMnistSklearn
   tasks:
-    - name: DeployMyelinRecommender
-      type: ModelDeployer
-      modelSelectionStrategy: "best"
-      trainer: TrainMyelinRecommender
+    - deployer:
+        models:
+          - trainer: TrainMyelinRecommender
+            deployer: DeployMyelinRecommender
+            modelSelectionStrategy: best
 ```
 
 This sensor has two main components `triggers` and `conditions`.
@@ -223,19 +242,18 @@ ones since the deployment needs to be exposed through an API:
 
 ```
 - name: DeployMyelinRecommender
-  type: Deployer
-
-  imageBuild:
-    type: S2I
-    repositoryName: deploy-myelin-recommender
-    buildLocation: /src/
-    contextDir: myelin_recommender
-    buiderImage: registry-intl.eu-central-1.aliyuncs.com/myelinproj/myelin-deployer-s2i-python:v0.1.0
-
   deploy:
     deploymentType: "canary"
     replicas: 2
     endpointType: REST
+    endpointRestType: Multipart
+    imageBuild:
+      repositoryName: deploy-myelin-recommender
+      artifact: rec-source
+      buildLocation: /src/
+      s2i:
+        contextDir: recommender_demo
+        buiderImage: docker.io/myelinio/myelin-deployer-s2i-python:v0.1.1
 ```
 
 In this case we don't need to define a *Dockerfile* as Myelin provides a
@@ -250,17 +268,30 @@ For S2I, we need to define the following:
 This sensor monitors the deployment and makes a decision to execute tasks
 (for example retrain) if a list of conditions are met:
 ```
-- name: PostDeploymentDecisionMaker
+- name: DeploymentDecisionMaker
   triggers:
-    - name: RecommenderDeployAccuracy
-      type: Alert
-      condition: "{{recommender_deploy_accuracy}} < 0.90"
+    - name: mnistTrainingComplete
+      type: Lifecycle
+      condition: Succeeded
+      task: TrainMyelinRecommender
+
   tasks:
-    - name: DataPrepMyelinRecommender
-      type: Generic
-    - name: TrainMyelinRecommender
-      type: ModelTrainer
-      trainer: TrainMyelinRecommender
+    - deployer:
+        models:
+          - name: MyelinKerasRecommender
+            trainer: TrainMyelinTest
+            deployer: DeployMyelinTest
+            modelSelectionStrategy: "best"
+        routes:
+          - path: /predict
+            dag:
+              - name: DeployMyelinRecommender
+                path: /predict
+          - path: /send-feedback
+            dag:
+              - name: DeployMyelinRecommender
+                path: /send-feedback
+
 ```
 
 In this definition the sensor would retrain the model (run data preprocessing
