@@ -6,6 +6,7 @@ image: images/blog/aws_logo_smile_1200x630.png
 ---
 
 This post describes how to install *Myelin* on AWS.
+<br><br>
 
 <!--more-->
 
@@ -17,9 +18,9 @@ This post describes how to install *Myelin* on AWS.
     kubectl label namespace $NAMESPACE istio-injection=enabled
     ```
 
-2. Install helm: https://github.com/helm/helm/blob/master/docs/install.md
+2. Install Helm client: [Installation](https://github.com/helm/helm/blob/master/docs/install.md)
 
-3. Install tiller:
+3. Install Tiller:
 
     ```bash
     kubectl -n kube-system create sa tiller
@@ -27,7 +28,7 @@ This post describes how to install *Myelin* on AWS.
     helm init --service-account tiller
     ```
 
-4. Add myelin repo to Helm:
+4. Add *Myelin* repo to Helm:
 
     ```bash
     helm repo add myelin.io https://myelin-helm-charts.storage.googleapis.com/
@@ -41,7 +42,7 @@ This post describes how to install *Myelin* on AWS.
     ```yaml
     dockerSecret:
       auths:
-        registry.hub.docker.com:
+        dockerRegistryUrl:
           auth: authbase64
           Username: username
           Password: password
@@ -58,28 +59,38 @@ This post describes how to install *Myelin* on AWS.
 
     In this file the following fields should be provided:
     
-    - authbase64: `echo -n 'username:password' | base64`
-    - username: dockerhub user name
-    - password: dockerhub password
-    - email: dockerhub email
-    - accesskey: aws access key
-    - secretkey: aws secret key
+    - dockerRegistryUrl: add the repository url instead of this line, for example use `registry.hub.docker.com` for docker hub.
+    - dockerSecret.auths.auth: Auth token. For docker hub it can be generated as follows: `echo -n 'username:password' | base64`
+    - dockerSecret.auths.Username: docker repository user name
+    - dockerSecret.auths.Password: docker repository password
+    - dockerSecret.auths.Email: docker repository email
+    
+    Get AWS access and secret keys: [AWS key setup](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). 
+    Note that the user associated with this key should have sufficient privlidges to read and write to S3.
+     
+    - artifacts.accesskey: aws access key
+    - artifacts.secretkey: aws secret key
+    
+    To access Github using SSH add the following:
+    
+    github.sshPrivateKey: private key
+    github.sshPublicKey: public key
     
     Create a config file `aws-config.yaml`:
     
-    Make sure the region is the same as the cluster region
+    Create an S3 bucket that stores temporary files on S3. Make sure the region is the same as the bucket region.
     
     ```yaml
     workflowController:
-      dockerServer: registry.hub.docker.com
-      dockerNamespace: docker-images
+      dockerServer: dockerRegistryUrl
+      dockerNamespace: namespace
       config:
         artifactRepository:
           archiveLogs: true
           s3:
             bucket: myelin-dev
-            endpoint: s3.eu-central-1.amazonaws.com
-            region: eu-central-1
+            endpoint: s3.eu-west-1.amazonaws.com
+            region: eu-west-1
             accessKeySecret:
               name: myelin-artifacts
               key: accesskey
@@ -93,8 +104,8 @@ This post describes how to install *Myelin* on AWS.
           archiveLogs: true
           s3:
             bucket: myelin-dev
-            endpoint: s3.eu-central-1.amazonaws.com
-            region: eu-central-1
+            endpoint: s3.eu-west-1.amazonaws.com
+            region: eu-west-1
             accessKeySecret:
               name: myelin-artifacts
               key: accesskey
@@ -102,28 +113,31 @@ This post describes how to install *Myelin* on AWS.
               name: myelin-artifacts
               key: secretkey
     ```
+    
+    The following values should be filled in:
+    
+    - workflowController.dockerServer: repository url, for example use `registry.hub.docker.com` for docker hub.
+    - workflowController.dockerNamespace: namespace of the repository, for docker hub it is the same as the user name.
+    - workflowController.config.artifactRepository.s3.bucket: S3 bucket 
+    - workflowController.config.artifactRepository.s3.bucket: S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+    - workflowController.config.artifactRepository.s3.region: S3 region.
+    - deployerController.config.artifactRepository.s3.bucket: S3 bucket 
+    - deployerController.config.artifactRepository.s3.bucket: S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+    - deployerController.config.artifactRepository.s3.region: S3 region.
 
 6. Install the Helm chart:
 
-    - Get the latest version:
-
-        ```bash
-        helm search myelin.io -l
-        VERSION=v0.1.7-20190304000414
-        ```
-
-    - Install Myelin
+    - Install *Myelin*
 
         ```bash
         RELEASE_NAME=myelin-app
         CONFIG_FILE=aws-config.yaml
         SECRETS_FILE=secrets.yaml
         NAMESPACE=myelin
-        VERSION=v0.1.7-20190304000414
         
         helm install myelin.io/myelin \
              --debug \
-            --version $VERSION \
+             --devel \
              --name $RELEASE_NAME \
              -f $CONFIG_FILE,$SECRETS_FILE \
              --set createCustomResource=true \
