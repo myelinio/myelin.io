@@ -302,11 +302,11 @@ This sensor monitors the deployment and makes a decision to execute tasks
         routes:
           - path: /predict
             dag:
-              - name: DeployMyelinRecommender
+              - task: DeployMyelinRecommender
                 path: /predict
           - path: /send-feedback
             dag:
-              - name: DeployMyelinRecommender
+              - task: DeployMyelinRecommender
                 path: /send-feedback
 
 ```
