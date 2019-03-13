@@ -5,7 +5,7 @@ author: Tamas Jambor
 image: images/blog/aws_logo_smile_1200x630.png
 ---
 
-This post describess how to install *Myelin* on AWS.
+This post describes how to install *Myelin* on AWS.
 <br><br>
 
 <!--more-->
