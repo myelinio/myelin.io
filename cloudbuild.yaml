@@ -6,6 +6,9 @@ steps:
            '--plaintext-file=ftp.sh', '--location=global',
            '--keyring=myelin-keyring', '--key=myelin-key']
 
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['submodule', 'update', '--init']
+
   - name: 'gcr.io/$PROJECT_ID/hugo'
     env: ['HUGO_ENV=production']
 
