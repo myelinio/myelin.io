@@ -1,0 +1,23 @@
+
+steps:
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['kms', 'decrypt', '--ciphertext-file=$_FTP_SECRET_ENC',
+           '--plaintext-file=ftp.sh', '--location=global',
+           '--keyring=myelin-keyring', '--key=myelin-key']
+
+  - name: 'gcr.io/$PROJECT_ID/hugo'
+    env: ['HUGO_ENV=production']
+
+  - name: 'debian:9.5-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        set -e
+        apt-get update && apt-get install -y ncftp hugo
+        source ftp.sh
+        ncftpput -z -R -v -u $$USERID -p $$PASSWORD $$ADDRESS /public_html public/*
+
+substitutions:
+  _FTP_SECRET_ENC: ci/secrets/ftp.sh.enc
