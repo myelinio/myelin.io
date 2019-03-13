@@ -7,12 +7,7 @@ steps:
            '--keyring=myelin-keyring', '--key=myelin-key']
 
   - name: 'gcr.io/$PROJECT_ID/hugo'
-    entrypoint: 'ash'
-    args:
-      - '-c'
-      - |
-        set -e
-        ./build_website.sh
+    env: ['HUGO_ENV=production']
 
   - name: 'debian:9.5-slim'
     entrypoint: 'bash'
@@ -20,9 +15,9 @@ steps:
       - '-c'
       - |
         set -e
-        apt-get update && apt-get install -y ncftp
+        apt-get update && apt-get install -y ncftp hugo
         source ftp.sh
-        ncftpput -R -v -u $$USER_ID -p $$PASSWORD $$ADDRESS public_html public/*
+        ncftpput -z -R -v -u $$USERID -p $$PASSWORD $$ADDRESS /public_html public/*
 
 substitutions:
   _FTP_SECRET_ENC: ci/secrets/ftp.sh.enc
