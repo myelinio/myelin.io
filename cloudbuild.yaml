@@ -1,0 +1,28 @@
+
+steps:
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['kms', 'decrypt', '--ciphertext-file=$_FTP_SECRET_ENC',
+           '--plaintext-file=ftp.sh', '--location=global',
+           '--keyring=myelin-keyring', '--key=myelin-key']
+
+  - name: 'gcr.io/$PROJECT_ID/hugo'
+    entrypoint: 'ash'
+    args:
+      - '-c'
+      - |
+        set -e
+        ./build_website.sh
+
+  - name: 'debian:9.5-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        set -e
+        apt-get update && apt-get install -y ncftp
+        source ftp.sh
+        ncftpput -R -v -u $$USER_ID -p $$PASSWORD $$ADDRESS public_html public/*
+
+substitutions:
+  _FTP_SECRET_ENC: ci/secrets/ftp.sh.enc
