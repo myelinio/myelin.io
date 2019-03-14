@@ -127,7 +127,7 @@ This post describes how to install *Myelin* on AWS.
 
 6. Install the Helm chart:
 
-    - Install *Myelin*
+    - Install *Myelin* (add the --devel flag if you would like to install the latest development version)
 
         ```bash
         RELEASE_NAME=myelin-app
@@ -137,7 +137,6 @@ This post describes how to install *Myelin* on AWS.
         
         helm install myelin.io/myelin \
              --debug \
-             --devel \
              --name $RELEASE_NAME \
              -f $CONFIG_FILE,$SECRETS_FILE \
              --set createCustomResource=true \
