@@ -80,8 +80,8 @@ This post describes how to install *Myelin* on AWS.
     To access Github using SSH add the following (set authenticateGithub.enabled to false if you are accessing public repositories
      via https):
     
-    **github.sshPrivateKey:** private key
-    **github.sshPublicKey:** public key
+    - **github.sshPrivateKey:** private key
+    - **github.sshPublicKey:** public key
     
     Create a config file `aws-config.yaml`:
     
