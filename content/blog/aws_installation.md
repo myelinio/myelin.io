@@ -40,6 +40,9 @@ This post describes how to install *Myelin* on AWS.
     Create a file `secrets.yaml` with the following content:
 
     ```yaml
+    authenticateDocker:
+      enabled: true
+
     dockerSecret:
       auths:
         dockerRegistryUrl:
@@ -51,6 +54,9 @@ This post describes how to install *Myelin* on AWS.
     artifacts:
       accesskey: accesskey
       secretkey: secretkey
+
+    authenticateGithub:
+      enabled: true
     
     github:
       sshPrivateKey: PRIVATE_KEY
@@ -59,22 +65,23 @@ This post describes how to install *Myelin* on AWS.
 
     In this file the following fields should be provided:
     
-    - dockerRegistryUrl: add the repository url instead of this line, for example use `registry.hub.docker.com` for docker hub.
-    - dockerSecret.auths.auth: Auth token. For docker hub it can be generated as follows: `echo -n 'username:password' | base64`
-    - dockerSecret.auths.Username: docker repository user name
-    - dockerSecret.auths.Password: docker repository password
-    - dockerSecret.auths.Email: docker repository email
+    - **dockerRegistryUrl:** add the repository url instead of this line, for example use `registry.hub.docker.com` for docker hub.
+    - **dockerSecret.auths.auth:** Auth token. For docker hub it can be generated as follows: `echo -n 'username:password' | base64`
+    - **dockerSecret.auths.Username:** docker repository user name
+    - **dockerSecret.auths.Password:** docker repository password
+    - **dockerSecret.auths.Email:** docker repository email
     
     Get AWS access and secret keys: [AWS key setup](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). 
-    Note that the user associated with this key should have sufficient privlidges to read and write to S3.
+    Note that the user associated with this key should have sufficient privileges to read and write to S3.
      
-    - artifacts.accesskey: aws access key
-    - artifacts.secretkey: aws secret key
+    - **artifacts.accesskey:** aws access key
+    - **artifacts.secretkey:** aws secret key
     
-    To access Github using SSH add the following:
+    To access Github using SSH add the following (set authenticateGithub.enabled to false if you are accessing public repositories
+     via https):
     
-    github.sshPrivateKey: private key
-    github.sshPublicKey: public key
+    **github.sshPrivateKey:** private key
+    **github.sshPublicKey:** public key
     
     Create a config file `aws-config.yaml`:
     
@@ -116,18 +123,18 @@ This post describes how to install *Myelin* on AWS.
     
     The following values should be filled in:
     
-    - workflowController.dockerServer: repository url, for example use `registry.hub.docker.com` for docker hub.
-    - workflowController.dockerNamespace: namespace of the repository, for docker hub it is the same as the user name.
-    - workflowController.config.artifactRepository.s3.bucket: S3 bucket 
-    - workflowController.config.artifactRepository.s3.bucket: S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
-    - workflowController.config.artifactRepository.s3.region: S3 region.
-    - deployerController.config.artifactRepository.s3.bucket: S3 bucket 
-    - deployerController.config.artifactRepository.s3.bucket: S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
-    - deployerController.config.artifactRepository.s3.region: S3 region.
+    - **workflowController.dockerServer:** repository url, for example use `registry.hub.docker.com` for docker hub. This repository is used to store docker images created by Myelin.
+    - **workflowController.dockerNamespace:** namespace of the repository, for docker hub it is the same as the user name.
+    - **workflowController.config.artifactRepository.s3.bucket:** S3 bucket
+    - **workflowController.config.artifactRepository.s3.endpoint:** S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+    - **workflowController.config.artifactRepository.s3.region:** S3 region.
+    - **deployerController.config.artifactRepository.s3.bucket:** S3 bucket
+    - **deployerController.config.artifactRepository.s3.endpoint:** S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+    - **deployerController.config.artifactRepository.s3.region:** S3 region.
 
 6. Install the Helm chart:
 
-    - Install *Myelin*
+    - Install *Myelin* (add the --devel flag if you would like to install the latest development version)
 
         ```bash
         RELEASE_NAME=myelin-app
@@ -137,7 +144,6 @@ This post describes how to install *Myelin* on AWS.
         
         helm install myelin.io/myelin \
              --debug \
-             --devel \
              --name $RELEASE_NAME \
              -f $CONFIG_FILE,$SECRETS_FILE \
              --set createCustomResource=true \

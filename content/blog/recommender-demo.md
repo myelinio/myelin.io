@@ -88,7 +88,9 @@ artifacts:
 - **git**: type of artifacts, we also support other artifacts such as *s3*
 - **git.repo**: name of the repository
 - **git.revision**: which branch or tag the process should pull
-- **git.sshPrivateKeySecret**: credentials (by default Myelin helm installer creates the necessary keys)
+- **git.sshPrivateKeySecret**: credentials, if you are planning to use
+ a private repository. Access key and secret can be provided in Helm,
+ when installing Myelin.
 
 ### Volume
 
