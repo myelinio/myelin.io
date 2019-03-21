@@ -12,6 +12,12 @@ and explains how to deploy it with *Myelin*.
 
 ### TL;DR
 
+- Install Myelin cli (MacOS)
+    ```bash
+    brew tap myelin/cli https://github.com/myelinio/homebrew-cli.git
+    brew install myelin
+    ```
+
 - Checkout the example code
     ```bash
     NAMESPACE=myelin
@@ -36,12 +42,10 @@ and explains how to deploy it with *Myelin*.
     NAMESPACE=myelin
 
     #Get the proxy name (if only one model is deployed)
-    PROXY_NAME=$(myelin get deploy -n $NAMESPACE ml-recommender-all -o json | jq -r '.[].proxyName')
-    #Get url of the load balancer
-    HOST_NAME=$(kubectl get service -n  $NAMESPACE istio-ingressgateway -o jsonpath={.status.loadBalancer.ingress[0].hostname})
-    PROXY_URL=http://${HOST_NAME}:80/${PROXY_NAME}/predict
-    
-    DATA='{"data": {"ndarray": [[10, 3], [10, 4]]}}'
+    URL=$(myelin endpoint -n $NAMESPACE ml-rec -o json | jq -r '.fixedUrl')
+    PROXY_URL=${URL}predict
+
+    DATA='{"data": {"ndarray": [3, 4]}}'
     curl -v -d "${DATA}" "${PROXY_URL}"
     ```
     
