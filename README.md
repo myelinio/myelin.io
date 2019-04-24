@@ -3,7 +3,7 @@ Quickstart
 Clone project including submodules
 
 ~~~~
-git clone --recurse-submodules -j8 https://user-id@github.org/myelinio/myelin.io.git
+git clone --recurse-submodules -j8 https://user-id@github.com/myelinio/myelin.io.git
 ~~~~
 
 Build project
