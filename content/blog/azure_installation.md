@@ -70,7 +70,8 @@ This post describes how to install *Myelin* on Azure.
     - **dockerSecret.auths.Password:** docker repository password
     - **dockerSecret.auths.Email:** docker repository email
     
-    Get or create Azure Storage Account and key:
+    Get or create an Azure Storage account and retrieve the key:
+    
      ```bash
     az storage account create --resource-group myResourceGroup --name myelinstorage --sku Standard_LRS
     az storage account keys list  --resource-group myResourceGroup --account-name myelinstorage
@@ -122,7 +123,7 @@ This post describes how to install *Myelin* on Azure.
           archiveLogs: true
           s3:
             bucket: myelin-dev
-            endpoint: myelin-minio-svc.myelin-uat:9000
+            endpoint: myelin-minio-svc.myelin:9000
             insecure: true
             accessKeySecret:
               name: myelin-artifacts
@@ -156,3 +157,12 @@ This post describes how to install *Myelin* on Azure.
              --set deployerController.createCustomResource=true \
              --namespace=$NAMESPACE
         ```
+
+7. Create *myelin-dev* bucket:
+    - Create *myelin-dev*, first port forward Minio service:
+        ```bash
+        kubectl -n $NAMESPACE port-forward svc/myelin-minio-svc 9000
+        ```
+    - login to Minio admin page using credentials myelinstorage/myelinstorage_key and create the bucket *myelin-dev*.
+
+
