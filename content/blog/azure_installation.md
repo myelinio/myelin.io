@@ -158,10 +158,33 @@ This post describes how to install *Myelin* on Azure.
         
         helm install myelin.io/myelin \
              --debug \
+             --wait --timeout 600 \
              --devel \
              --name $RELEASE_NAME \
              -f $CONFIG_FILE,$SECRETS_FILE \
              --set createCustomResource=true \
              --set deployerController.createCustomResource=true \
              --namespace=$NAMESPACE
+        ```
+
+7. Install the *Myelin* cli:
+
+    ```bash
+    brew tap myelin/cli https://github.com/myelinio/homebrew-cli.git
+    brew install myelin
+    ```        
+
+8. Test first Axon:
+    - Create Axon:
+        ```bash
+        myelin submit https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_rf_demo/recommender-demo.yaml --namespace=$NAMESPACE
+        ```
+    - Watch Axon execution:
+        ```bash
+        myelin watch axon ml-rec-rf --namespace=$NAMESPACE
+        ```
+    - Get Axon public endpoints:
+        ```bash
+        REST_URL=$(myelin endpoint ml-rec-rf  --namespace=$NAMESPACE|grep fixedUrl| cut -d" " -f2)
+        curl -XPOST ${REST_URL}predict --data '{"data":{"ndarray":[5411, 5439]}}'
         ```
