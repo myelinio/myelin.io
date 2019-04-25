@@ -185,7 +185,7 @@ This post describes how to install *Myelin* on Azure.
         ```bash
         myelin watch axon ml-rec-rf --namespace=$NAMESPACE
         ```
-    - Get Axon public endpoints:
+    - Get Axon public REST endpoints:
     
         ```bash
         REST_URL=$(myelin endpoint ml-rec-rf  --namespace=$NAMESPACE|grep fixedUrl| cut -d" " -f2)
