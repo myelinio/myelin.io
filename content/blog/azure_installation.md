@@ -1,6 +1,6 @@
 ---
 title: "Myelin installation steps (Azure)"
-date: 2019-04-24T18:51:12+06:00
+date: 2019-04-25T18:51:12+06:00
 author: Ryadh Khsib
 ---
 
