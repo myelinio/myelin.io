@@ -90,55 +90,55 @@ This post describes how to install *Myelin* on Azure.
     Create a config file `Azure-config.yaml`:
         
     ```yaml
- rook-ceph:
-   agent:
-     flexVolumeDirPath: /etc/kubernetes/volumeplugins
- 
- minio:
-   enabled: true
-   persistence:
-     enabled: false
-   azuregateway:
-     enabled: true
-     replicas: 1
-   fullnameOverride: myelin-minio-svc
-   defaultBucket:
-     enabled: true
-     name: myelin-bucket
-   accessKey: myelinstorage
-   secretKey: myelinstorage_key
- 
- workflowController:
-   dockerServer: myelinregistry.azurecr.io
-   dockerNamespace: myelinproj
-   config:
-     artifactRepository:
-       archiveLogs: true
-       s3:
-         bucket: myelin-bucket
-         endpoint: myelin-minio-svc.myelin:9000
-         insecure: true
-         accessKeySecret:
-           name: myelin-artifacts
-           key: accesskey
-         secretKeySecret:
-           name: myelin-artifacts
-           key: secretkey
- 
- deployerController:
-   config:
-     artifactRepository:
-       archiveLogs: true
-       s3:
-         bucket: myelin-bucket
-         endpoint: myelin-minio-svc.myelin:9000
-         insecure: true
-         accessKeySecret:
-           name: myelin-artifacts
-           key: accesskey
-         secretKeySecret:
-           name: myelin-artifacts
-           key: secretkey
+     rook-ceph:
+       agent:
+         flexVolumeDirPath: /etc/kubernetes/volumeplugins
+     
+     minio:
+       enabled: true
+       persistence:
+         enabled: false
+       azuregateway:
+         enabled: true
+         replicas: 1
+       fullnameOverride: myelin-minio-svc
+       defaultBucket:
+         enabled: true
+         name: myelin-bucket
+       accessKey: myelinstorage
+       secretKey: myelinstorage_key
+     
+     workflowController:
+       dockerServer: myelinregistry.azurecr.io
+       dockerNamespace: myelinproj
+       config:
+         artifactRepository:
+           archiveLogs: true
+           s3:
+             bucket: myelin-bucket
+             endpoint: myelin-minio-svc.myelin:9000
+             insecure: true
+             accessKeySecret:
+               name: myelin-artifacts
+               key: accesskey
+             secretKeySecret:
+               name: myelin-artifacts
+               key: secretkey
+     
+     deployerController:
+       config:
+         artifactRepository:
+           archiveLogs: true
+           s3:
+             bucket: myelin-bucket
+             endpoint: myelin-minio-svc.myelin:9000
+             insecure: true
+             accessKeySecret:
+               name: myelin-artifacts
+               key: accesskey
+             secretKeySecret:
+               name: myelin-artifacts
+               key: secretkey
     ```
     
     The following values should be filled in:
