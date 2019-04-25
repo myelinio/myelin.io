@@ -176,14 +176,17 @@ This post describes how to install *Myelin* on Azure.
 
 8. Test first Axon:
     - Create Axon:
+    
         ```bash
         myelin submit https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_rf_demo/recommender-demo.yaml --namespace=$NAMESPACE
         ```
     - Watch Axon execution:
+    
         ```bash
         myelin watch axon ml-rec-rf --namespace=$NAMESPACE
         ```
     - Get Axon public endpoints:
+    
         ```bash
         REST_URL=$(myelin endpoint ml-rec-rf  --namespace=$NAMESPACE|grep fixedUrl| cut -d" " -f2)
         curl -XPOST ${REST_URL}predict --data '{"data":{"ndarray":[5411, 5439]}}'
