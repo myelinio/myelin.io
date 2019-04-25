@@ -69,7 +69,8 @@ This post describes how to install *Myelin* on Azure.
     - **dockerSecret.auths.Username:** docker repository user name
     - **dockerSecret.auths.Password:** docker repository password
     - **dockerSecret.auths.Email:** docker repository email
-    
+   
+    <br/>
     Get or create an Azure Storage account and retrieve the key:
     
      ```bash
@@ -79,15 +80,15 @@ This post describes how to install *Myelin* on Azure.
     - **artifacts.accesskey:** Azure access key
     - **artifacts.secretkey:** Azure secret key
     
+    <br/>
     To access Github using SSH add the following:
     
     - **github.sshPrivateKey:** private key
     - **github.sshPublicKey:** public key
     
+    <br/>
     Create a config file `Azure-config.yaml`:
-    
-    Create an S3 bucket that stores temporary files on S3. Make sure the region is the same as the bucket region.
-    
+        
     ```yaml
     rook-ceph:
       agent:
@@ -159,10 +160,11 @@ This post describes how to install *Myelin* on Azure.
         ```
 
 7. Create *myelin-dev* bucket:
-    - Create *myelin-dev*, first port forward Minio service:
+    - Port forward Minio service:
+       
         ```bash
         kubectl -n $NAMESPACE port-forward svc/myelin-minio-svc 9000
         ```
-    - login to Minio admin page using credentials myelinstorage/myelinstorage_key and create the bucket *myelin-dev*.
+    - Login to Minio admin page using the credentials myelinstorage/myelinstorage_key and create the bucket *myelin-dev*.
 
 
