@@ -169,6 +169,6 @@ This post describes how to install *Myelin* on Google Cloud Platform.
     - Get Axon public REST endpoints:
 
         ```bash
-        REST_URL=$(myelin endpoint ml-rec-rf  --namespace=$NAMESPACE|grep fixedUrl| cut -d" " -f2)
+        REST_URL=$(myelin endpoint ml-rec-rf  --namespace=$NAMESPACE -o json | jq -r '.fixedUrl')
         curl -XPOST ${REST_URL}predict --data '{"data":{"ndarray":[5411, 5439]}}'
         ```
