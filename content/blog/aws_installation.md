@@ -70,23 +70,24 @@ This post describes how to install *Myelin* on AWS.
     - **dockerSecret.auths.Username:** docker repository user name
     - **dockerSecret.auths.Password:** docker repository password
     - **dockerSecret.auths.Email:** docker repository email
-    
-    Get AWS access and secret keys: [AWS key setup](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). 
+
+    <br/>
+    Get your AWS access and secret keys: [AWS key setup](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
     Note that the user associated with this key should have sufficient privileges to read and write to S3.
      
     - **artifacts.accesskey:** aws access key
     - **artifacts.secretkey:** aws secret key
-    
+
+    <br/>
     To access Github using SSH add the following (set authenticateGithub.enabled to false if you are accessing public repositories
      via https):
     
     - **github.sshPrivateKey:** private key
     - **github.sshPublicKey:** public key
-    
+
+    <br/>
     Create a config file `aws-config.yaml`:
-    
-    Create an S3 bucket that stores temporary files on S3. Make sure the region is the same as the bucket region.
-    
+
     ```yaml
     workflowController:
       dockerServer: dockerRegistryUrl
@@ -132,6 +133,8 @@ This post describes how to install *Myelin* on AWS.
     - **deployerController.config.artifactRepository.s3.endpoint:** S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
     - **deployerController.config.artifactRepository.s3.region:** S3 region.
 
+    Create an S3 bucket that stores temporary files on S3. Make sure the region is the same as the bucket region.
+
 6. Install the Helm chart:
 
     - Install *Myelin* (add the --devel flag if you would like to install the latest development version)
@@ -149,4 +152,29 @@ This post describes how to install *Myelin* on AWS.
              --set createCustomResource=true \
              --set deployerController.createCustomResource=true \
              --namespace=$NAMESPACE
+        ```
+
+7. Install the *Myelin* cli:
+
+    ```bash
+    brew tap myelin/cli https://github.com/myelinio/homebrew-cli.git
+    brew install myelin
+    ```
+
+8. Test first Axon:
+    - Create Axon:
+
+        ```bash
+        myelin submit https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_rf_demo/recommender-demo.yaml --namespace=$NAMESPACE
+        ```
+    - Watch Axon execution:
+
+        ```bash
+        myelin watch axon ml-rec-rf --namespace=$NAMESPACE
+        ```
+    - Get Axon public REST endpoints:
+
+        ```bash
+        REST_URL=$(myelin endpoint ml-rec-rf  --namespace=$NAMESPACE|grep fixedUrl| cut -d" " -f2)
+        curl -XPOST ${REST_URL}predict --data '{"data":{"ndarray":[5411, 5439]}}'
         ```

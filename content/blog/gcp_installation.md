@@ -45,11 +45,11 @@ This post describes how to install *Myelin* on Google Cloud Platform.
     dockerSecret:
       auths:
         dockerRegistryUrl:
-          auth: authbase64
+          auth: AUTHBASE64
 
     artifacts:
-      accesskey: accesskey
-      secretkey: secretkey
+      accesskey: ACCESSKEY
+      secretkey: SECRETKEY
 
     authenticateGithub:
       enabled: true
@@ -64,21 +64,23 @@ This post describes how to install *Myelin* on Google Cloud Platform.
     - **dockerSecret.auths.auth:** Auth token. To obtain this token for GCP, go to IAM -> [Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts)
     and create a new key. Then convert this file to a base64 encoded string: `echo -n '_json_key:' | cat - key.json | base64`
 
+    <br/>
     Enable s3 interoperability for Google Storage [here.](https://console.cloud.google.com/storage/settings) Select
     the interoperability tab and create a new key, which can be used for the following:
 
     - **artifacts.accesskey:** gcp access key
     - **artifacts.secretkey:** gcp secret key
 
+    <br/>
     To access Github using SSH add the following (set authenticateGithub.enabled to false if you are accessing public repositories
      via https):
 
     - **github.sshPrivateKey:** private key
     - **github.sshPublicKey:** public key
 
+    <br/>
     Create a config file `gcp-config.yaml`:
 
-    Create a bucket that stores temporary files on Google Storage. Make sure the region is the same as the bucket region.
 
     ```yaml
     rook-ceph:
@@ -121,6 +123,12 @@ This post describes how to install *Myelin* on Google Cloud Platform.
 
     - **workflowController.dockerServer:** repository url, use `gcr.io` for Container Registry. This repository is used to store docker images created by Myelin.
     - **workflowController.dockerNamespace:** namespace of the repository, for GCR it is the same as the project name.
+    - **workflowController.config.artifactRepository.s3.bucket:** Google Storage bucket
+    - **workflowController.config.artifactRepository.s3.region:** Google Storage region.
+    - **deployerController.config.artifactRepository.s3.bucket:** Google Storage bucket
+    - **deployerController.config.artifactRepository.s3.region:** Google Storage region.
+
+    Create a bucket that stores temporary files on Google Storage. Make sure the region is the same as the bucket region.
 
 6. Install the Helm chart:
 
@@ -139,4 +147,28 @@ This post describes how to install *Myelin* on Google Cloud Platform.
              --set createCustomResource=true \
              --set deployerController.createCustomResource=true \
              --namespace=$NAMESPACE
+        ```
+7. Install the *Myelin* cli:
+
+    ```bash
+    brew tap myelin/cli https://github.com/myelinio/homebrew-cli.git
+    brew install myelin
+    ```
+
+8. Test first Axon:
+    - Create Axon:
+
+        ```bash
+        myelin submit https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_rf_demo/recommender-demo.yaml --namespace=$NAMESPACE
+        ```
+    - Watch Axon execution:
+
+        ```bash
+        myelin watch axon ml-rec-rf --namespace=$NAMESPACE
+        ```
+    - Get Axon public REST endpoints:
+
+        ```bash
+        REST_URL=$(myelin endpoint ml-rec-rf  --namespace=$NAMESPACE|grep fixedUrl| cut -d" " -f2)
+        curl -XPOST ${REST_URL}predict --data '{"data":{"ndarray":[5411, 5439]}}'
         ```
