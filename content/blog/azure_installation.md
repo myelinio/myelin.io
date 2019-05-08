@@ -1,11 +1,10 @@
 ---
-title: "Myelin installation steps (AWS)"
-date: 2019-02-19T16:51:12+06:00
-author: Tamas Jambor
-image: images/blog/aws_logo_smile_1200x630.png
+title: "Myelin installation steps (Azure)"
+date: 2019-04-25T08:51:12+06:00
+author: Ryadh Khsib
 ---
 
-This post describes how to install *Myelin* on AWS.
+This post describes how to install *Myelin* on Azure.
 <br><br>
 
 <!--more-->
@@ -42,25 +41,25 @@ This post describes how to install *Myelin* on AWS.
     ```yaml
     authenticateDocker:
       enabled: true
-
+    
     dockerSecret:
       auths:
-        dockerRegistryUrl:
-          auth: authbase64
-          Username: username
+        myelinregistry.azurecr.io:
+          auth: authbase64=
+          Username: username@gmail.com
           Password: password
-          Email: email
+          Email: username@gmail.com
     
     artifacts:
       accesskey: accesskey
       secretkey: secretkey
-
+    
     authenticateGithub:
       enabled: true
     
     github:
-      sshPrivateKey: PRIVATE_KEY
-      sshPublicKey: PUBLIC_KEY
+      sshPrivateKey: SSH_PRIVATE_KEY
+      sshPublicKey: SSH_PUBLIC_KEY
     ```
 
     In this file the following fields should be provided:
@@ -70,70 +69,82 @@ This post describes how to install *Myelin* on AWS.
     - **dockerSecret.auths.Username:** docker repository user name
     - **dockerSecret.auths.Password:** docker repository password
     - **dockerSecret.auths.Email:** docker repository email
-
+   
     <br/>
-    Get your AWS access and secret keys: [AWS key setup](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-    Note that the user associated with this key should have sufficient privileges to read and write to S3.
-     
-    - **artifacts.accesskey:** aws access key
-    - **artifacts.secretkey:** aws secret key
-
+    Get or create an Azure Storage account and retrieve the key:
+    
+     ```bash
+    az storage account create --resource-group myResourceGroup --name myelinstorage --sku Standard_LRS
+    az storage account keys list  --resource-group myResourceGroup --account-name myelinstorage
+    ```
+    - **artifacts.accesskey:** Azure access key
+    - **artifacts.secretkey:** Azure secret key
+    
     <br/>
-    To access Github using SSH add the following (set authenticateGithub.enabled to false if you are accessing public repositories
-     via https):
+    To access Github using SSH add the following:
     
     - **github.sshPrivateKey:** private key
     - **github.sshPublicKey:** public key
-
-    <br/>
-    Create a config file `aws-config.yaml`:
-
-    ```yaml
-    workflowController:
-      dockerServer: dockerRegistryUrl
-      dockerNamespace: namespace
-      config:
-        artifactRepository:
-          archiveLogs: true
-          s3:
-            bucket: myelin-dev
-            endpoint: s3.eu-west-1.amazonaws.com
-            region: eu-west-1
-            accessKeySecret:
-              name: myelin-artifacts
-              key: accesskey
-            secretKeySecret:
-              name: myelin-artifacts
-              key: secretkey
     
-    deployerController:
-      config:
-        artifactRepository:
-          archiveLogs: true
-          s3:
-            bucket: myelin-dev
-            endpoint: s3.eu-west-1.amazonaws.com
-            region: eu-west-1
-            accessKeySecret:
-              name: myelin-artifacts
-              key: accesskey
-            secretKeySecret:
-              name: myelin-artifacts
-              key: secretkey
+    <br/>
+    Create a config file `Azure-config.yaml`:
+        
+    ```yaml
+     rook-ceph:
+       agent:
+         flexVolumeDirPath: /etc/kubernetes/volumeplugins
+     
+     minio:
+       enabled: true
+       persistence:
+         enabled: false
+       azuregateway:
+         enabled: true
+         replicas: 1
+       fullnameOverride: myelin-minio-svc
+       defaultBucket:
+         enabled: true
+         name: myelin-bucket
+       accessKey: myelinstorage
+       secretKey: myelinstorage_key
+     
+     workflowController:
+       dockerServer: myelinregistry.azurecr.io
+       dockerNamespace: myelinproj
+       config:
+         artifactRepository:
+           archiveLogs: true
+           s3:
+             bucket: myelin-bucket
+             endpoint: myelin-minio-svc.myelin:9000
+             insecure: true
+             accessKeySecret:
+               name: myelin-artifacts
+               key: accesskey
+             secretKeySecret:
+               name: myelin-artifacts
+               key: secretkey
+     
+     deployerController:
+       config:
+         artifactRepository:
+           archiveLogs: true
+           s3:
+             bucket: myelin-bucket
+             endpoint: myelin-minio-svc.myelin:9000
+             insecure: true
+             accessKeySecret:
+               name: myelin-artifacts
+               key: accesskey
+             secretKeySecret:
+               name: myelin-artifacts
+               key: secretkey
     ```
     
     The following values should be filled in:
     
-    - **workflowController.dockerServer:** repository url, for example use `registry.hub.docker.com` for docker hub. This repository is used to store docker images created by Myelin.
+    - **workflowController.dockerServer:** repository url, for example use `registry.hub.docker.com` for docker hub.
     - **workflowController.dockerNamespace:** namespace of the repository, for docker hub it is the same as the user name.
-    - **workflowController.config.artifactRepository.s3.bucket:** S3 bucket
-    - **workflowController.config.artifactRepository.s3.endpoint:** S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
-    - **workflowController.config.artifactRepository.s3.region:** S3 region.
-    - **deployerController.config.artifactRepository.s3.bucket:** S3 bucket
-    - **deployerController.config.artifactRepository.s3.endpoint:** S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
-    - **deployerController.config.artifactRepository.s3.region:** S3 region.
-
-    Create an S3 bucket that stores temporary files on S3. Make sure the region is the same as the bucket region.
 
 6. Install the Helm chart:
 
@@ -141,12 +152,14 @@ This post describes how to install *Myelin* on AWS.
 
         ```bash
         RELEASE_NAME=myelin-app
-        CONFIG_FILE=aws-config.yaml
+        CONFIG_FILE=Azure-config.yaml
         SECRETS_FILE=secrets.yaml
         NAMESPACE=myelin
         
         helm install myelin.io/myelin \
              --debug \
+             --wait --timeout 600 \
+             --devel \
              --name $RELEASE_NAME \
              -f $CONFIG_FILE,$SECRETS_FILE \
              --set createCustomResource=true \
@@ -159,21 +172,21 @@ This post describes how to install *Myelin* on AWS.
     ```bash
     brew tap myelin/cli https://github.com/myelinio/homebrew-cli.git
     brew install myelin
-    ```
+    ```        
 
 8. Test first Axon:
     - Create Axon:
-
+    
         ```bash
         myelin submit https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_rf_demo/recommender-demo.yaml --namespace=$NAMESPACE
         ```
     - Watch Axon execution:
-
+    
         ```bash
         myelin watch axon ml-rec-rf --namespace=$NAMESPACE
         ```
     - Get Axon public REST endpoints:
-
+    
         ```bash
         REST_URL=$(myelin endpoint ml-rec-rf  --namespace=$NAMESPACE -o json | jq -r '.fixedUrl')
         curl -XPOST ${REST_URL}predict --data '{"data":{"ndarray":[5411, 5439]}}'
