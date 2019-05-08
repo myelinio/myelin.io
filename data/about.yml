@@ -8,7 +8,7 @@ aboutItem :
 
 - icon : tf-ion-ios-medkit-outline
   title : Self healing deployments
-  content : Machine learning deployments are monitored and restored if their performance deteriorate.
+  content : Machine learning deployments are monitored and restored if their performance deteriorates.
 
 - icon : tf-ion-android-refresh
   title : End to end
