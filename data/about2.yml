@@ -1,12 +1,12 @@
 enable : true
 image : images/about/blackboard-business-chalkboard-355988.jpg
 title : Introducing declarative machine learning
-description : Myelin was inspired by the philosophy of Kubenetes, where the user describes a desired state of a machine learning deploment and Myelin works out what is the best way to achieve that state.
+description : Myelin was inspired by the philosophy of Kubernetes, where the user describes the desired state of a machine learning deployment and Myelin works out the best way to achieve that state.
 description2 : In a simple case, the desired state might include a single model that is trained and deployed, serving accurate predictions. When the model performance drops, Myelin retrains the model and replaces the inaccurate one.
 aboutItem : 
   - icon : tf-circle-compass
     title : Automated deployments
-    content : The tool is designed to manage machine learning deployments without human intervention.
+    content : Myelin is designed to manage machine learning deployments without human intervention.
     
   - icon : tf-hotairballoon
     title : Advanced scenarios
