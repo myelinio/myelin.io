@@ -143,8 +143,8 @@ This post describes how to install *Myelin* on Azure.
     
     The following values should be filled in:
     
-    - **workflowController.dockerServer:** repository url, for example use `registry.hub.docker.com` for docker hub.
-    - **workflowController.dockerNamespace:** namespace of the repository, for docker hub it is the same as the user name.
+    - **axonController.dockerServer:** repository url, for example use `registry.hub.docker.com` for docker hub.
+    - **axonController.dockerNamespace:** namespace of the repository, for docker hub it is the same as the user name.
 
 6. Install the Helm chart:
 
