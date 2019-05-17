@@ -18,22 +18,20 @@ and explains how to deploy it with *Myelin*.
     brew install myelin
     ```
 
-- Checkout the example code
+- Create a new namespace
     ```bash
     NAMESPACE=myelin
-    git clone https://github.com/myelinio/myelin-examples.git
-    cd myelin-examples/recommender_demo/
+    kubectl create ns $NAMESPACE
     ```
-     
-- Create the deployment 
+
+- Create a service account
     ```bash
-    kubectl create -f recommender-demo.yaml -n $NAMESPACE
+    kubectl create sa -n $NAMESPACE -f https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_demo/myelin-sa.yaml
     ```
-    
-    or use Myelin cli 
-    
+
+- Create the deployment, wait until it gets deployed:
     ```bash
-    myelin submit recommender-demo.yaml -n $NAMESPACE --watch
+    myelin submit https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_demo/recommender-demo.yaml -n $NAMESPACE --watch
     ```
     
 - Get recommendation
