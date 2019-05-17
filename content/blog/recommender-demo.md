@@ -26,7 +26,7 @@ and explains how to deploy it with *Myelin*.
 
 - Create a service account
     ```bash
-    kubectl create sa -n $NAMESPACE -f https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_demo/myelin-sa.yaml
+    kubectl create -n $NAMESPACE -f https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_demo/myelin-sa.yaml
     ```
 
 - Create the deployment, wait until it gets deployed:
