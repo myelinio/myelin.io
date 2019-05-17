@@ -108,7 +108,7 @@ This post describes how to install *Myelin* on Azure.
        accessKey: myelinstorage
        secretKey: myelinstorage_key
      
-     workflowController:
+     axonController:
        dockerServer: myelinregistry.azurecr.io
        dockerNamespace: myelinproj
        config:

@@ -89,7 +89,7 @@ This post describes how to install *Myelin* on AWS.
     Create a config file `aws-config.yaml`:
 
     ```yaml
-    workflowController:
+    axonController:
       dockerServer: dockerRegistryUrl
       dockerNamespace: namespace
       config:

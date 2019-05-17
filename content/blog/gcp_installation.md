@@ -87,7 +87,7 @@ This post describes how to install *Myelin* on Google Cloud Platform.
       agent:
         flexVolumeDirPath: /home/kubernetes/flexvolume
 
-    workflowController:
+    axonController:
       dockerServer: dockerRegistryUrl
       dockerNamespace: namespace
       config:
