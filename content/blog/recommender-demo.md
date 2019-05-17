@@ -47,7 +47,7 @@ and explains how to deploy it with *Myelin*.
     curl -v -d "${DATA}" "${PROXY_URL}"
     ```
     
-    This returns a rating for user 10, item 3 and user 10, item 4.
+    This returns the top 10 recommendation for user 3 and 4.
 
 Full code can be found [here.](https://github.com/myelinio/myelin-examples/tree/master/recommender_demo)
 
