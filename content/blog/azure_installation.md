@@ -158,6 +158,7 @@ This post describes how to install *Myelin* on Azure.
         
         helm install myelin.io/myelin \
              --debug \
+             --devel \
              --wait --timeout 600 \
              --devel \
              --name $RELEASE_NAME \

@@ -147,6 +147,7 @@ This post describes how to install *Myelin* on AWS.
         
         helm install myelin.io/myelin \
              --debug \
+             --devel \
              --name $RELEASE_NAME \
              -f $CONFIG_FILE,$SECRETS_FILE \
              --set createCustomResource=true \
