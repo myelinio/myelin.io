@@ -87,7 +87,7 @@ This post describes how to install *Myelin* on Google Cloud Platform.
       agent:
         flexVolumeDirPath: /home/kubernetes/flexvolume
 
-    workflowController:
+    axonController:
       dockerServer: dockerRegistryUrl
       dockerNamespace: namespace
       config:
@@ -121,10 +121,10 @@ This post describes how to install *Myelin* on Google Cloud Platform.
     ```
     The following values should be filled in:
 
-    - **workflowController.dockerServer:** repository url, use `gcr.io` for Container Registry. This repository is used to store docker images created by Myelin.
-    - **workflowController.dockerNamespace:** namespace of the repository, for GCR it is the same as the project name.
-    - **workflowController.config.artifactRepository.s3.bucket:** Google Storage bucket
-    - **workflowController.config.artifactRepository.s3.region:** Google Storage region.
+    - **axonController.dockerServer:** repository url, use `gcr.io` for Container Registry. This repository is used to store docker images created by Myelin.
+    - **axonController.dockerNamespace:** namespace of the repository, for GCR it is the same as the project name.
+    - **axonController.config.artifactRepository.s3.bucket:** Google Storage bucket
+    - **axonController.config.artifactRepository.s3.region:** Google Storage region.
     - **deployerController.config.artifactRepository.s3.bucket:** Google Storage bucket
     - **deployerController.config.artifactRepository.s3.region:** Google Storage region.
 
@@ -142,6 +142,7 @@ This post describes how to install *Myelin* on Google Cloud Platform.
 
         helm install myelin.io/myelin \
              --debug \
+             --devel \
              --name $RELEASE_NAME \
              -f $CONFIG_FILE,$SECRETS_FILE \
              --set createCustomResource=true \

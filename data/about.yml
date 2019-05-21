@@ -4,10 +4,10 @@ headingSpan : Myelin?
 aboutItem : 
 - icon : tf-ion-android-cloud-outline
   title : Cloud native
-  content : Myelin is designed from ground up to run on Kuberentes.
+  content : Myelin is designed from the ground up to run on Kubernetes.
 
 - icon : tf-ion-ios-medkit-outline
-  title : Self healing deployments
+  title : Self-healing deployments
   content : Machine learning deployments are monitored and restored if their performance deteriorates.
 
 - icon : tf-ion-android-refresh

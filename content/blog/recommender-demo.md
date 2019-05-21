@@ -18,22 +18,20 @@ and explains how to deploy it with *Myelin*.
     brew install myelin
     ```
 
-- Checkout the example code
+- Create a new namespace
     ```bash
     NAMESPACE=myelin
-    git clone https://github.com/myelinio/myelin-examples.git
-    cd myelin-examples/recommender_demo/
+    kubectl create ns $NAMESPACE
     ```
-     
-- Create the deployment 
+
+- Create a service account
     ```bash
-    kubectl create -f recommender-demo.yaml -n $NAMESPACE
+    kubectl create -n $NAMESPACE -f https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_demo/myelin-sa.yaml
     ```
-    
-    or use Myelin cli 
-    
+
+- Create the deployment, wait until it gets deployed:
     ```bash
-    myelin submit recommender-demo.yaml -n $NAMESPACE --watch
+    myelin submit https://raw.githubusercontent.com/myelinio/myelin-examples/master/recommender_demo/recommender-demo.yaml -n $NAMESPACE --watch
     ```
     
 - Get recommendation
@@ -49,7 +47,7 @@ and explains how to deploy it with *Myelin*.
     curl -v -d "${DATA}" "${PROXY_URL}"
     ```
     
-    This returns a rating for user 10, item 3 and user 10, item 4.
+    This returns the top 10 recommendation for user 3 and 4.
 
 Full code can be found [here.](https://github.com/myelinio/myelin-examples/tree/master/recommender_demo)
 
@@ -102,7 +100,21 @@ Volume is a shared folder that is attached to each container that can be used
 to share data between steps. This folder is normally exposed by some environment
 variables (by default: `MODEL_PATH` and `DATA_PATH`)
 
-In this example we define a `ceph` shared disk:
+In this example we define an `nfs` shared disk:
+```
+volumeClaimTemplate:
+metadata:
+  name: axon-store
+spec:
+  storageClassName: nfs
+  accessModes: ["ReadWriteMany"]
+  resources:
+    requests:
+      storage: 1Gi
+```
+
+Alternatively we provide a flag in helm that can enable `ceph` instead of `nfs`.
+If Myelin was install with `ceph` use the following definition instead:
 ```
 volume:
 name: axon-store
@@ -146,9 +158,9 @@ scikit-learn>=0.18
 pandas>=0.22.0
 keras==1.2.2
 six>=1.11.0
-tensorflow==1.5.0
+tensorflow>=1.12.1
 Theano==1.0.4
-myelin==0.0.10
+myelin==0.0.11
 ```
 
 *preprocess.py* downloads the data and save it to the shared folder in a format
@@ -266,8 +278,6 @@ ones since the deployment needs to be exposed through an API:
 ```
 - name: DeployMyelinRecommender
   deploy:
-    deploymentType: "canary"
-    replicas: 2
     endpointType: REST
     endpointRestType: Multipart
     imageBuild:
@@ -285,6 +295,56 @@ builder image that exposes the code through an API using an S2I builder.
 For S2I, we need to define the following:
 - *.s2i/environment* the environment variables used in the container
 - *RNNRecommender.py* has the code to load and define the predict method
+
+### Deployment decision maker (sensor)
+This sensor monitors the training task and gets executed when training
+is complete. It is responsible deploying an endpoint that exposes the model
+to the outside world.
+
+```
+- name: DeploymentDecisionMaker
+ triggers:
+   - name: mnistTrainingComplete
+     type: Lifecycle
+     condition: Succeeded
+     task: TrainMyelinRecommender
+
+ tasks:
+   - deployer:
+       name: recommenderdeployer
+       replicas: 1
+       rolloutSpec:
+         - destinations:
+             - destinationIndex: 0
+               weight: 50
+             - destinationIndex: 1
+               weight: 50
+       models:
+         - name: RecommenderModel
+           modelSelectionStrategy: "best"
+           routingStrategy:
+             - destinations:
+                 - destinationName: BackendRecommender
+                   weight: 100
+           backendModels:
+             - name: BackendRecommender
+               trainer: TrainMyelinRecommender
+               deployer: DeployMyelinRecommender
+               modelSelectionStrategy: "best"
+       routes:
+         - path: /predict
+           dag:
+             - model: RecommenderModel
+               path: /predict
+         - path: /send-feedback
+           dag:
+             - model: RecommenderModel
+               path: /send-feedback
+```
+
+This component allows users to define routing strategies between multiple
+(retrained) versions of the model, also between different variations of
+models.
 
 ### Post deployment decision maker (sensor)
 

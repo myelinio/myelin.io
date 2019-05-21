@@ -90,7 +90,7 @@ This post describes how to install *Myelin* on AWS.
     Create a config file `aws-config.yaml`:
 
     ```yaml
-    workflowController:
+    axonController:
       dockerServer: dockerRegistryUrl
       dockerNamespace: namespace
       config:
@@ -125,13 +125,13 @@ This post describes how to install *Myelin* on AWS.
     
     The following values should be filled in:
     
-    - **workflowController.dockerServer:** repository url, for example use `aws_account_id.dkr.ecr.region.amazonaws.com` for AWS ECR. 
+    - **axonController.dockerServer:** repository url, for example use `aws_account_id.dkr.ecr.region.amazonaws.com` for AWS ECR. 
     Where aws_account_id and and region should be filled in. This repository is used to store docker images created by Myelin. Note
     that AWS ECR does not create missing namespaces, all namespaces have to be created manually.
-    - **workflowController.dockerNamespace:** namespace of the repository, for docker hub it is the same as the user name.
-    - **workflowController.config.artifactRepository.s3.bucket:** S3 bucket
-    - **workflowController.config.artifactRepository.s3.endpoint:** S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
-    - **workflowController.config.artifactRepository.s3.region:** S3 region.
+    - **axonController.dockerNamespace:** namespace of the repository, for docker hub it is the same as the user name.
+    - **axonController.config.artifactRepository.s3.bucket:** S3 bucket
+    - **axonController.config.artifactRepository.s3.endpoint:** S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+    - **axonController.config.artifactRepository.s3.region:** S3 region.
     - **deployerController.config.artifactRepository.s3.bucket:** S3 bucket
     - **deployerController.config.artifactRepository.s3.endpoint:** S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
     - **deployerController.config.artifactRepository.s3.region:** S3 region.
@@ -150,6 +150,7 @@ This post describes how to install *Myelin* on AWS.
         
         helm install myelin.io/myelin \
              --debug \
+             --devel \
              --name $RELEASE_NAME \
              -f $CONFIG_FILE,$SECRETS_FILE \
              --set createCustomResource=true \
