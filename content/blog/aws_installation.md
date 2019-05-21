@@ -65,8 +65,9 @@ This post describes how to install *Myelin* on AWS.
 
     In this file the following fields should be provided:
     
-    - **dockerRegistryUrl:** add the repository url instead of this line, for example use `registry.hub.docker.com` for docker hub.
-    - **dockerSecret.auths.auth:** Auth token. For docker hub it can be generated as follows: `echo -n 'username:password' | base64`
+    - **dockerRegistryUrl:** Add the repository url instead of this line, for example use `aws_account_id.dkr.ecr.region.amazonaws.com` for AWS ECR. 
+    Where aws_account_id and and region should be filled in.
+    - **dockerSecret.auths.auth:** Auth token. For AWS ECR, this can be generated as follows: `aws ecr get-authorization-token --output text --query 'authorizationData[].authorizationToken'`
     - **dockerSecret.auths.Username:** docker repository user name
     - **dockerSecret.auths.Password:** docker repository password
     - **dockerSecret.auths.Email:** docker repository email
@@ -124,7 +125,9 @@ This post describes how to install *Myelin* on AWS.
     
     The following values should be filled in:
     
-    - **workflowController.dockerServer:** repository url, for example use `registry.hub.docker.com` for docker hub. This repository is used to store docker images created by Myelin.
+    - **workflowController.dockerServer:** repository url, for example use `aws_account_id.dkr.ecr.region.amazonaws.com` for AWS ECR. 
+    Where aws_account_id and and region should be filled in. This repository is used to store docker images created by Myelin. Note
+    that AWS ECR does not create missing namespaces, all namespaces have to be created manually.
     - **workflowController.dockerNamespace:** namespace of the repository, for docker hub it is the same as the user name.
     - **workflowController.config.artifactRepository.s3.bucket:** S3 bucket
     - **workflowController.config.artifactRepository.s3.endpoint:** S3 endpoint. See Amazon Simple Storage Service (Amazon S3) in [AWS endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
