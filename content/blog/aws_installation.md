@@ -90,6 +90,10 @@ This post describes how to install *Myelin* on AWS.
     Create a config file `aws-config.yaml`:
 
     ```yaml
+    nfs-server:
+      persistence:
+        storageClass: default
+    
     axonController:
       dockerServer: dockerRegistryUrl
       dockerNamespace: namespace
