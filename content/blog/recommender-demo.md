@@ -276,7 +276,7 @@ ones since the deployment needs to be exposed through an API:
       buildLocation: /src/
       s2i:
         contextDir: recommender_demo
-        buiderImage: docker.io/myelinio/myelin-deployer-s2i-python:v0.1.1
+        builderImage: docker.io/myelinio/myelin-deployer-s2i-python:v0.1.1
 ```
 
 In this case we don't need to define a *Dockerfile* as Myelin provides a
