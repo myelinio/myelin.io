@@ -32,6 +32,11 @@ googleAnalytics = "UA-132898010-1"
 #    weight = 6
 
     [[menu.nav]]
+    name = "Product"
+    URL = "product"
+    weight = 7
+
+    [[menu.nav]]
     name = "Blog"
     URL = "blog"
     weight = 7
