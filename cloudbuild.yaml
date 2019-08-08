@@ -10,7 +10,7 @@ steps:
     args: ['submodule', 'sync']
 
 #  - name: 'gcr.io/cloud-builders/git'
-#    args: ['submodule', 'update', '--init']
+#    args: ['submodule', 'update', '--init', '--remote']
 
   - name: 'gcr.io/$PROJECT_ID/hugo'
     env: ['HUGO_ENV=production']
