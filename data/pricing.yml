@@ -1,55 +1,33 @@
-enable : false
-heading : Our Greatest
+enable : true
+heading : Our Pricing
 headingSpan : Plans
 pricingTable :
-  - title : Open Source
+  - title : Developer
     price : $0
     time : month
     btnURL : #
-    btnText : Signup
+    btnText : Request a Demo
     plan :
-      - planDetails : 1GB Disk Space
-      - planDetails : 10 Email Account
-      - planDetails : Script Installer
-      - planDetails : 1 GB Storage
-      - planDetails : 10 GB Bandwidth
-      - planDetails : 24/7 Tech Support
-      
-  - title : Silver
-    price : $149
-    time : month
+      - planDetails : 10 Deployed models
+      - planDetails : No Support
+      - planDetails : No Model optimisation
+
+  - title : Startup
+    price : Contact Us
+    time : unlimited
     btnURL : #
-    btnText : Signup
+    btnText : Request a Demo
     plan :
-      - planDetails : 1GB Disk Space
-      - planDetails : 10 Email Account
-      - planDetails : Script Installer
-      - planDetails : 1 GB Storage
-      - planDetails : 10 GB Bandwidth
-      - planDetails : 24/7 Tech Support
-      
-  - title : Gold
-    price : $199
-    time : month
+      - planDetails : Unlimited Deployed Models
+      - planDetails: 24/7 Tech Support
+      - planDetails: Quaterly Model Optimisation
+
+  - title : Enterprise
+    price : Contact Us
+    time : unlimited
     btnURL : #
-    btnText : Signup
+    btnText : Request a Demo
     plan :
-      - planDetails : 1GB Disk Space
-      - planDetails : 10 Email Account
-      - planDetails : Script Installer
-      - planDetails : 1 GB Storage
-      - planDetails : 10 GB Bandwidth
+      - planDetails : Unlimited models
       - planDetails : 24/7 Tech Support
-      
-  - title : Platinum
-    price : $299
-    time : month
-    btnURL : #
-    btnText : Signup
-    plan :
-      - planDetails : 1GB Disk Space
-      - planDetails : 10 Email Account
-      - planDetails : Script Installer
-      - planDetails : 1 GB Storage
-      - planDetails : 10 GB Bandwidth
-      - planDetails : 24/7 Tech Support
+      - planDetails: Monthly  Model Optimisation

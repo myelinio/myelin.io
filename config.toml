@@ -26,15 +26,15 @@ googleAnalytics = "UA-132898010-1"
 #    URL = "our-team"
 #    weight = 5
 
-#    [[menu.nav]]
-#    name = "Pricing"
-#    URL = "pricing"
-#    weight = 6
-
     [[menu.nav]]
     name = "Product"
-    URL = "product"
-    weight = 7
+    URL = "products"
+    weight = 4
+
+    [[menu.nav]]
+    name = "Pricing"
+    URL = "pricing"
+    weight = 5
 
     [[menu.nav]]
     name = "Blog"
