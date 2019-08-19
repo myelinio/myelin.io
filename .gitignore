@@ -11,3 +11,4 @@ hack/**/debug
 debug.test
 *.iml
 **/_gen/
+tmp/
