@@ -1,7 +1,7 @@
 enable : true
 heading : Product &
 headingSpan : Support
-serviceItem :
+productItem :
   - icon : tf-globe
     title : AutoML
     content : Auto ML training and deployment.

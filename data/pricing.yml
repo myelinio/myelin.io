@@ -8,9 +8,9 @@ pricingTable :
     btnURL : #
     btnText : Request a Demo
     plan :
-      - planDetails : 10 Deployed models
+      - planDetails : 10 Deployed Models
       - planDetails : No Support
-      - planDetails : No Model optimisation
+      - planDetails : No Model Optimisation
 
   - title : Startup
     price : Contact Us
@@ -28,6 +28,6 @@ pricingTable :
     btnURL : #
     btnText : Request a Demo
     plan :
-      - planDetails : Unlimited models
+      - planDetails : Unlimited Deployed Models
       - planDetails : 24/7 Tech Support
-      - planDetails: Monthly  Model Optimisation
+      - planDetails: Monthly Model Optimisation
