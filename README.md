@@ -20,19 +20,4 @@ cd myelin.io
 hugo -D
 ~~~~
 
-
-TODO:
-
-
-Overview
-    Quick Tour
-    Getting Started
-    Basic Concepts
-    Next Steps
-Installation
-Lenses SQL
-Connectors
-User Guide
-Developer Guide
-Upgrade Notes
-Release Notes
+icon list available here https://github.com/themefisher/themefisher-font/blob/master/style.css
