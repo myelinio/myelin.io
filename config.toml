@@ -8,7 +8,7 @@ googleAnalytics = "UA-132898010-1"
 [menu]
     [[menu.nav]]
     name = "About"
-    URL = "about"
+    URL = "#about"
     weight = 2
 
 #    [[menu.nav]]
@@ -28,23 +28,28 @@ googleAnalytics = "UA-132898010-1"
 
     [[menu.nav]]
     name = "Product"
-    URL = "products"
+    URL = "#products"
     weight = 4
 
     [[menu.nav]]
     name = "Pricing"
-    URL = "pricing"
+    URL = "#pricing"
     weight = 5
 
-    [[menu.nav]]
-    name = "Blog"
-    URL = "blog"
-    weight = 7
+    #    [[menu.nav]]
+    #    name = "Blog"
+    #    URL = "#blog"
+    #    weight = 7
 
     [[menu.nav]]
     name = "Contact"
-    URL = "contact-us"
+    URL = "#contact-us"
     weight = 8
+
+    [[menu.nav]]
+    name = "Docs"
+    URL = "/docs"
+    weight = 9
 
 # Site params
 [params]
