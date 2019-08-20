@@ -59,7 +59,7 @@ Implemented optimisers include [Hyperband](https://arxiv.org/abs/1603.06560) and
 
 ## ML Models Deployment
 ### Model Runtime Deployment
-The framework allows to generate a REST api around 
+The framework allows to automatically generate REST API and Docker image using user prediction source code.
 
 ### Model Graph Deployment
 Myelin provide easy ways to deploy a predictive graph of models. Once a model is trained, a sensor can be configured to automatically deploy the trained model.
@@ -69,12 +69,12 @@ Myelin provide easy ways to deploy a predictive graph of models. Once a model is
 Each deployed model is versioned and is assigned a URL for specific to the version. The version is generated using the unique set of events that triggered the deployment task.
 
 ### Model Selection Strategy
-If multiple models a
+If multiple models are selected to perform a prediction, Myelin provides tools to automatically select the best model based on performance metrics.
 
 
-## ML Models Monitoring
+## ML Models Automatic Correction
 ### Metrics Server
-Myelin Metrics infrastructure is built around [Prometheus](https://prometheus.io). It is also provides a helper libraries to export metrics.
+Myelin Metrics infrastructure is built around [Prometheus](https://prometheus.io). It is also provides helper libraries to export metrics.
 
-### Alerts Management
+### Alerts Processing
 Each model graph can define alert based on metrics. The even driven infrastructure can be configured to react to alerts and trigger repair actions.
