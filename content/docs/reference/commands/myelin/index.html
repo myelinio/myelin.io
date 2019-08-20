@@ -1,0 +1,48 @@
+---
+title: myelin
+description: Myelin control interface.
+generator: pkg-collateral-docs
+number_of_entries: 38
+---
+<p>Myelin configuration command line utility for service operators to
+    debug and diagnose their Myelin models.
+</p>
+<table class="command-flags">
+    <thead>
+    <tr>
+        <th>Flags</th>
+        <th>Shorthand</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>--context &lt;string&gt;</code></td>
+        <td></td>
+        <td>The name of the kubeconfig context to use (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--istioNamespace &lt;string&gt;</code></td>
+        <td><code>-i</code></td>
+        <td>Istio system namespace (default `istio-system`)</td>
+    </tr>
+    <tr>
+        <td><code>--kubeconfig &lt;string&gt;</code></td>
+        <td><code>-c</code></td>
+        <td>Kubernetes configuration file (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--log_output_level &lt;string&gt;</code></td>
+        <td></td>
+        <td>Comma-separated minimum per-scope logging level of messages to output, in the form of &lt;scope&gt;:&lt;level&gt;,&lt;scope&gt;:&lt;level&gt;,...
+            where scope can be one of [ads, attributes, default, grpcAdapter, kube-converter, mcp, meshconfig, model,
+            rbac] and level can be one of [debug, info, warn, error, fatal, none] (default `default:info`)
+        </td>
+    </tr>
+    <tr>
+        <td><code>--namespace &lt;string&gt;</code></td>
+        <td><code>-n</code></td>
+        <td>Config namespace (default ``)</td>
+    </tr>
+    </tbody>
+</table>

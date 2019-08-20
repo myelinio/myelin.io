@@ -27,6 +27,7 @@ Our framework was built around core infrastructure principles:
 
 
 And around Data Science aims:
+
 - **AutoML**
 - **AutoAdaptive ML**
 
@@ -62,19 +63,21 @@ Implemented optimisers include [Hyperband](https://arxiv.org/abs/1603.06560) and
 The framework allows to automatically generate REST API and Docker image using user prediction source code.
 
 ### Model Graph Deployment
-Myelin provide easy ways to deploy a predictive graph of models. Once a model is trained, a sensor can be configured to automatically deploy the trained model.
+Myelin provides easy ways to deploy a predictive graph of models. Once a model is trained, a sensor can be configured to automatically deploy the trained model.
+
+A model graph is collection of models that contribute to build a higher level prediction. For example, an OCR model could be implemented as` 
 
 
 ### Automated Model Versioning
 Each deployed model is versioned and is assigned a URL for specific to the version. The version is generated using the unique set of events that triggered the deployment task.
 
 ### Model Selection Strategy
-If multiple models are selected to perform a prediction, Myelin provides tools to automatically select the best model based on performance metrics.
+If multiple models are selected to perform a prediction, Myelin provides tools to automatically select the best model based on reported performance metrics.
 
 
 ## ML Models Automatic Correction
 ### Metrics Server
-Myelin Metrics infrastructure is built around [Prometheus](https://prometheus.io). It is also provides helper libraries to export metrics.
+Myelin Metrics infrastructure is built around [Prometheus](https://prometheus.io). Helper client libraries are provided to help exporting metrics.
 
 ### Alerts Processing
-Each model graph can define alert based on metrics. The even driven infrastructure can be configured to react to alerts and trigger repair actions.
+Each model can define alerts based on metrics. Myelin can be then configured to react to alerts and trigger repair actions.
