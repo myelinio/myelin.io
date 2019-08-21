@@ -40,10 +40,10 @@ and explains how to deploy it with *Myelin*.
     NAMESPACE=myelin
 
     #Get the proxy name (if only one model is deployed)
-    URL=$(myelin endpoint -n $NAMESPACE ml-rec -o json | jq -r '.fixedUrl')
+    URL=$(myelin endpoint -n $NAMESPACE ml-gpt2 -o json | jq -r '.fixedUrl')
     PROXY_URL=${URL}predict
 
-    DATA='{"data": {"ndarray": [3, 4]}}'
+    DATA='{"data": {"ndarray": ["To be, or not to be: that is the question"]}}'
     curl -v -d "${DATA}" "${PROXY_URL}"
     ```
     
