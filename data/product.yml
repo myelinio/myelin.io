@@ -8,7 +8,7 @@ productItem :
     
   - icon : tf-ion-laptop
     title : Model Graph Deployment
-    content : Auomtated Model Deployment, SSL, Authentication, Model Graph.
+    content : Automated Model Deployment, SSL, Authentication, Model Graph.
     
   - icon : tf-genius
     title : Hyperparameter Tuning
