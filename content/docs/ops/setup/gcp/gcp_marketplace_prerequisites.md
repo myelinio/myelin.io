@@ -4,7 +4,7 @@ date: 2019-09-20T13:00:00+06:00
 author: Tamas Jambor
 ---
 
-This article list the prerequisites that should be in place before deploying
+This article lists the prerequisites that should be in place before deploying
 Myelin on GCP marketplace.
 
 1. Create a GKE cluster with Istio enabled:
@@ -50,4 +50,4 @@ Myelin on GCP marketplace.
 	kubectl apply -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/deployer/role/nfs-provisioner-storageclass.yaml"
     ```
     
-This is all that is needed to deploy the application on the marketplace.
+After the initial setup, deploy the application from the marketplace: [GCP Marketplace](https://console.cloud.google.com/marketplace/details/myelin-public/myelin)
