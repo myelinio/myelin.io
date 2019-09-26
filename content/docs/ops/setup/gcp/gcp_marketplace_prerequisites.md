@@ -50,4 +50,10 @@ Myelin on GCP marketplace.
 	kubectl apply -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/deployer/role/nfs-provisioner-storageclass.yaml"
     ```
     
+6. Create a service account for the user to run Myelin (note the name of the service account):
+
+    ```bash
+    kubectl apply -n myelin-ns -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/deployer/role/myelin-minimal-role.yaml"
+    ```
+    
 After the initial setup, deploy the application from the marketplace: [GCP Marketplace](https://console.cloud.google.com/marketplace/details/myelin-public/myelin)
