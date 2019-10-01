@@ -35,8 +35,10 @@ And around Data Science aims:
 
 ## Event Driven Job Scheduling Framework
 
-Myelin offer set of configurable sensors that lister to configured event and triggers a pipeline once an event is fired.
-Event sensors type could be external (REST trigger, Prometheus alert) or internal (Calendar, another Task execution lifecyle event,..)
+Myelin offer set of configurable sensors that lister to configured event 
+and triggers a pipeline once an event is fired.
+Event sensors type could be external (REST trigger, Prometheus alert) or 
+internal (Calendar, another Task execution lifecyle event,..)
 
 The framework provides additional features:
 
