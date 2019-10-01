@@ -12,7 +12,9 @@ Myelin is a [Cloud Native](https://www.cncf.io/) Machine Learning deployment fra
 
 Myelin was inspired by the philosophy of [Kubernetes](https://kubernetes.io), where the user describes the desired state of a machine learning deployment and Myelin works out the best way to achieve that state.
 
-In a simple case, the desired state might include a single model that is trained and deployed, serving accurate predictions. When the model performance drops, Myelin retrains the model and replaces the inaccurate one.
+In a simple case, the desired state might include a single model that is 
+trained and deployed, serving accurate predictions. When the model performance drops, 
+Myelin retrains the model and replaces the inaccurate one.
 
 Myelin aims at helping Data Science teams deliver digital services. 
 
