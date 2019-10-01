@@ -51,7 +51,8 @@ The framework provides additional features:
 ## ML Models Training
 
 ### Training Runtime
-Myelin provides tools to run ML models on top of Kubernetes. It also allows to configure the provisioned infrastructure and resources . 
+Myelin provides tools to run ML models on top of Kubernetes. It also 
+allows to configure the provisioned infrastructure and resources. 
 
 ### Hyper-parameter Optimisation
 Myelin models can be tuned using Hyper-parameter optimisation (HPO). The HPO controller implements state-of-the-art algorithms to search for optimal models hyper-parameters.

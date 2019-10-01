@@ -1,0 +1,57 @@
+{{"<!-- end Contact Area -->" | safeHTML}}
+<footer id="footer" class="bg-one">
+
+				{{"<!-- Footer Social Links -->" | safeHTML}}
+				<div class="social-icon">
+					<ul class="list-inline">
+						{{ range .Site.Params.footer.socialIcon }}
+            <li><a href="{{ .url }}" target="_blank"><i class="{{ .icon }}"></i></a></li>
+						{{ end }}
+					</ul>
+				</div>
+
+				{{"<!-- copyright -->" | safeHTML}}
+				<div class="copyright">
+					<a href="{{ .Site.BaseURL | absURL }}">
+						<img src="{{ .Site.Params.logo | absURL }}" height="30px" width="115px" />
+					</a>
+					<br>
+
+					<p><a href="{{ .Site.Params.footer.copyrightURL | absURL }}"> {{ with .Site.Params.footer.copyright }} {{ . }} {{ end }} </a> &copy; <script>
+							document.write(new Date().getFullYear())
+						</script>. All Rights Reserved.</p>
+				</div>
+
+</footer>
+{{"<!-- /footer -->" | safeHTML}}
+
+{{"<!-- Essential Scripts -->" | safeHTML}}
+
+<script src="{{"js/themes_init.min.js"|absURL}}"></script>
+<script src="{{"js/all.min.js"|absURL}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" defer></script>
+
+{{"<!-- Main jQuery -->" | safeHTML}}
+<script type="text/javascript" src="{{ "plugins/jquery/dist/jquery.min.js" | absURL}}"></script>
+{{"<!-- Bootstrap 3.1 -->" | safeHTML}}
+<script type="text/javascript" src="{{ "plugins/bootstrap/dist/js/bootstrap.min.js" | absURL}}"></script>
+{{"<!-- Slick Carousel -->" | safeHTML}}
+<script type="text/javascript" src="{{ "plugins/slick-carousel/slick/slick.min.js" | absURL}}"></script>
+{{"<!-- Portfolio Filtering -->" | safeHTML}}
+<script type="text/javascript" src="{{ "plugins/mixitup/mixitup.min.js" | absURL}}"></script>
+{{"<!-- Smooth Scroll -->" | safeHTML}}
+<script type="text/javascript" src="{{ "plugins/smooth-scroll/dist/js/smooth-scroll.min.js" | absURL}}"></script>
+{{"<!-- Magnific popup -->" | safeHTML}}
+<script type="text/javascript" src="{{ "plugins/magnific-popup/dist/jquery.magnific-popup.min.js" | absURL}}"></script>
+{{ if .Site.Params.map.enable }}
+{{"<!-- Google Map API -->" | safeHTML}}
+<script type="text/javascript"  src="{{ .Site.Params.maps.gmapAPI | absURL }}"></script>
+{{ end }}
+{{"<!-- Sticky Nav -->" | safeHTML}}
+<script type="text/javascript" src="{{ "plugins/Sticky/jquery.sticky.js" | absURL}}"></script>
+{{"<!-- Number Counter Script -->" | safeHTML}}
+<script type="text/javascript" src="{{ "plugins/count-to/jquery.countTo.js" | absURL}}"></script>
+{{"<!-- wow.min Script -->" | safeHTML}}
+<script type="text/javascript" src="{{ "plugins/wow/dist/wow.min.js" | absURL}}"></script>
+{{"<!-- Custom js -->" | safeHTML}}
+<script type="text/javascript" src="{{ "js/script.js" | absURL}}"></script>
