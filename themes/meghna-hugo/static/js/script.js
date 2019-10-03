@@ -110,19 +110,19 @@ jQuery(function ($) {
         email.indexOf('@') which checks if there is @ in the email input field.
         This JavaScript function will return -1 if no occurrence have been found.*/
         if (name.length == 0) {
-            var error = true;
+            error = true;
             $('#licence-name').css("border-color", "#D8000C");
         } else {
             $('#licence-name').css("border-color", "#666");
         }
         if (email.length == 0 || email.indexOf('@') == '-1') {
-            var error = true;
+            error = true;
             $('#licence-email').css("border-color", "#D8000C");
         } else {
             $('#licence-email').css("border-color", "#666");
         }
         if (company.length == 0) {
-            var error = true;
+            error = true;
             $('#licence-company').css("border-color", "#D8000C");
         } else {
             $('#licence-company').css("border-color", "#666");
@@ -198,25 +198,25 @@ jQuery(function ($) {
         email.indexOf('@') which checks if there is @ in the email input field.
         This JavaScript function will return -1 if no occurrence have been found.*/
         if (name.length == 0) {
-            var error = true;
+            error = true;
             $('#name').css("border-color", "#D8000C");
         } else {
             $('#name').css("border-color", "#666");
         }
         if (email.length == 0 || email.indexOf('@') == '-1') {
-            var error = true;
+            error = true;
             $('#email').css("border-color", "#D8000C");
         } else {
             $('#email').css("border-color", "#666");
         }
         if (subject.length == 0) {
-            var error = true;
+            error = true;
             $('#subject').css("border-color", "#D8000C");
         } else {
             $('#subject').css("border-color", "#666");
         }
         if (message.length == 0) {
-            var error = true;
+            error = true;
             $('#message').css("border-color", "#D8000C");
         } else {
             $('#message').css("border-color", "#666");
