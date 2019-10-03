@@ -44,11 +44,16 @@ googleAnalytics = "UA-132898010-1"
     [[menu.nav]]
     name = "Contact"
     URL = "#contact-us"
+    weight = 7
+
+    [[menu.nav]]
+    name = "Licence"
+    URL = "#licence"
     weight = 8
 
     [[menu.nav]]
     name = "Docs"
-    URL = "/docs"
+    URL = "docs"
     weight = 9
 
 # Site params

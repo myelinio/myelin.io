@@ -6,9 +6,9 @@ jQuery(function ($) {
     /* ========================================================================= */
 
     // Preloader js
-    $(function(){ // this replaces document.ready
-        setTimeout(function(){
-            $('#preloader').fadeOut('slow', function() {
+    $(function () { // this replaces document.ready
+        setTimeout(function () {
+            $('#preloader').fadeOut('slow', function () {
                 $(this).remove();
             });
         }, 1500);
@@ -82,6 +82,91 @@ jQuery(function ($) {
         autoplaySpeed: 4000
     });
 
+    /* ========================================================================= */
+    /*   Licence Form Validating
+    /* ========================================================================= */
+
+    $('#licence-submit').click(function (e) {
+
+        //stop the form from being submitted
+        e.preventDefault();
+
+        /* declare the variables, var error is the variable that we use on the end
+        to determine if there was an error or not */
+        var error = false;
+        var name = $('#licence-name').val();
+        var email = $('#licence-email').val();
+        var company = $('#licence-company').val();
+
+        /* in the next section we do the checking by using VARIABLE.length
+        where VARIABLE is the variable we are checking (like name, email),
+        length is a JavaScript function to get the number of characters.
+        And as you can see if the num of characters is 0 we set the error
+        variable to true and show the name_error div with the fadeIn effect.
+        if it's not 0 then we fadeOut the div( that's if the div is shown and
+        the error is fixed it fadesOut.
+
+        The only difference from these checks is the email checking, we have
+        email.indexOf('@') which checks if there is @ in the email input field.
+        This JavaScript function will return -1 if no occurrence have been found.*/
+        if (name.length == 0) {
+            var error = true;
+            $('#licence-name').css("border-color", "#D8000C");
+        } else {
+            $('#licence-name').css("border-color", "#666");
+        }
+        if (email.length == 0 || email.indexOf('@') == '-1') {
+            var error = true;
+            $('#licence-email').css("border-color", "#D8000C");
+        } else {
+            $('#licence-email').css("border-color", "#666");
+        }
+        if (company.length == 0) {
+            var error = true;
+            $('#licence-company').css("border-color", "#D8000C");
+        } else {
+            $('#licence-company').css("border-color", "#666");
+        }
+
+        //now when the validation is done we check if the error variable is false (no errors)
+        if (error == false) {
+            //disable the submit button to avoid spamming
+            //and change the button text to Sending...
+            $('#licence-submit').attr({
+                'disabled': 'false',
+                'value': 'Sending...'
+            });
+
+            $.ajax({
+                url: 'https://us-central1-myelin-development.cloudfunctions.net/LicenceServer',
+                type: 'get',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                dataType: 'json',
+                data: {
+                    email: email,
+                    company: company
+                },
+                // data: $('#licence-form').serialize(),
+                success: function (data, textStatus, xhr) {
+                    //and after the ajax request ends we check the text returned
+                    if (xhr.status === 200) {
+                        //if the mail is sent remove the submit paragraph
+                        $('#lc-submit').remove();
+                        //and show the mail success div with fadeIn
+                        $('#licence-success').html("Your licence is: " + data["licence"]).fadeIn(500);
+                    } else {
+                        //show the mail failed div
+                        $('#licence-fail').fadeIn(500);
+                        //re enable the submit button by removing attribute disabled and change the text back to Send The Message
+                        $('#licence-submit').removeAttr('disabled').attr('value', 'Submit');
+                    }
+                },
+            });
+        }
+    });
+
 
     /* ========================================================================= */
     /*   Contact Form Validating
@@ -149,7 +234,7 @@ jQuery(function ($) {
             $.ajax({
                 url: 'https://hooks.zapier.com/hooks/catch/4266119/052x32/',
                 type: 'post',
-                dataType:'json',
+                dataType: 'json',
                 data: $('#contact-form').serialize(),
                 success: function (result) {
                     //and after the ajax request ends we check the text returned
@@ -162,7 +247,7 @@ jQuery(function ($) {
                         //show the mail failed div
                         $('#mail-fail').fadeIn(500);
                         //re enable the submit button by removing attribute disabled and change the text back to Send The Message
-                        $('#contact-submit').removeAttr('disabled').attr('value', 'Send The Message');
+                        $('#contact-submit').removeAttr('disabled').attr('value', 'Submit');
                     }
                 },
             });

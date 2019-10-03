@@ -852,6 +852,14 @@ a:hover {
   margin-top: 20px;
 }
 
+#licence, #licence h3, #licence h2 {
+  color: #FFFFFF;
+}
+
+.licence {
+  padding-top: 50px;
+}
+
 #contact-us, #contact-us h3, #contact-us h2 {
   color: #FFFFFF;
 }
@@ -864,7 +872,7 @@ a:hover {
   margin-bottom: 60px;
 }
 
-.contact-form .form-control {
+.contact-form .licence-form .form-control {
   background-color: transparent;
   border: 1px solid rgba(236, 239, 241, 0.07);
   height: 45px;
@@ -873,6 +881,20 @@ a:hover {
 .contact-form textarea.form-control {
   padding: 10px;
   height: 120px;
+}
+
+.licence-form input:hover,
+.licence-form textarea:hover,
+#licence-submit:hover {
+  border-color: #37a3cc;
+}
+
+#licence-submit {
+  border: 1px solid rgba(236, 239, 241, 0.07);
+  background: #37a3cc;
+  padding: 12px 0;
+  width: 100%;
+  margin: 0;
 }
 
 .contact-form input:hover,
@@ -893,7 +915,7 @@ a:hover {
   height: 400px;
 }
 
-.contact-info p {
+.contact-info .licence-info p {
   margin-bottom: 25px;
 }
 
@@ -917,6 +939,16 @@ a:hover {
   border-radius: 4px;
   font-size: 13px;
   background-color: #FFBABA;
+}
+
+.licence-success {
+  background-color: #6cb670;
+  word-wrap: break-word;
+  border-radius: 4px;
+  color: #fff;
+  display: none;
+  font-size: 13px;
+  padding: 10px;
 }
 
 .success {
