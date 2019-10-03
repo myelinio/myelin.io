@@ -24,7 +24,15 @@ Myelin on GCP marketplace.
     kubectl label namespace myelin-ns istio-injection=enabled
     ```
     
-3. Create the necessary customer resource definitions:
+3. Create two bucket for Myelin to save logs into.
+
+    ```bash
+    gsutil mb -l europe-west2 gs://myelin-axon/ 
+    gsutil mb -l europe-west2 gs://myelin-deployer/
+    ```
+ 
+    
+4. Create the necessary customer resource definitions:
 
     ```bash
     kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml"
@@ -36,7 +44,9 @@ Myelin on GCP marketplace.
 	kubectl apply -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/crd/myelin.deployer.crd.yaml"
 	kubectl apply -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/crd/myelin.workflow.crd.yaml"
     ```
-4. Create the following cluster roles:
+5. Create the following cluster roles. These roles define a set of permissions that are
+required for Myelin controllers and additional components installed by default
+(Prometheus and NFS provisioner).
 
     ```bash
     kubectl apply -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/deployer/role/axon-controller-role.yaml"
@@ -44,13 +54,17 @@ Myelin on GCP marketplace.
 	kubectl apply -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/deployer/role/nfs-provisioner-role.yaml"
 	```
 	
-5. Create a storage class:
+6. Create a storage class. Myelin uses NFS filesystem to store metadata and
+models. A network disk gets attached to each instance to share data between pods and
+steps (we also support alternatives such as Ceph or HDFS).
 
     ```bash
 	kubectl apply -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/deployer/role/nfs-provisioner-storageclass.yaml"
     ```
     
-6. Create a service account for the user to run Myelin (note the name of the service account):
+7. Create a service account for the Myelin. This service account 
+is used when Myelin executes its axons. The name of this service account (myelin-minimal)
+should be referred in the axon definition in `spec.serviceAccountName`:
 
     ```bash
     kubectl apply -n myelin-ns -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/deployer/role/myelin-minimal-role.yaml"
