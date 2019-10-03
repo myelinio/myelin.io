@@ -9,7 +9,7 @@ steps:
   - name: 'gcr.io/$PROJECT_ID/hugo'
     env: ['HUGO_ENV=production']
 
-  - name: 'debian:9.5-slim'
+  - name: 'debian:10.1-slim'
     entrypoint: 'bash'
     args:
       - '-c'
