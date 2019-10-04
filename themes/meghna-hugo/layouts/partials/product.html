@@ -1,0 +1,33 @@
+{{ if .Site.Data.product.enable}}
+{{"<!-- product -->" | safeHTML }}
+<section id="products" class="bg-one1 section">
+    <div class="container">
+        <div class="row">
+
+            {{"<!-- section title -->" | safeHTML }}
+            <div class="title text-center wow fadeIn" data-wow-duration="500ms">
+                <h2>{{ with .Site.Data.product.heading }} {{ . }} {{ end }}<span class="color">{{ with .Site.Data.product.headingSpan }} {{ . }} {{ end }}</span></h2>
+                <div class="border"></div>
+            </div>
+            {{"<!-- /section title -->" | safeHTML }}
+
+            {{ range .Site.Data.product.productItem}}
+            {{"<!-- Single product Item -->" | safeHTML }}
+            <article class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms">
+                <div class="service-block text-center">
+                    <div class="icon-box">
+                        <div class="service-icon text-center">
+                            <i class="{{ .icon }}"></i>
+                        </div>
+                    </div>
+                    <h3>{{ .title }}</h3>
+                    <p>{{ .content }}</p>
+                </div>
+            </article>
+            {{"<!-- End Single product Item -->" | safeHTML }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{"<!-- /product -->" | safeHTML }}
+{{ end }}

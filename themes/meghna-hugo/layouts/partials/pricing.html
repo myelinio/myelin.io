@@ -1,0 +1,53 @@
+{{ if .Site.Data.pricing.enable}}
+{{"<!-- Start Pricing section -->" | safeHTML}}
+<section id="pricing" class="pricing section">
+    <div class="container">
+        <div class="row">
+
+            {{"<!-- section title -->" | safeHTML}}
+            <div class="col-lg-12">
+            <div class="title text-center wow fadeInDown" data-wow-duration="500ms">
+                <h2>{{ with .Site.Data.pricing.heading }} {{ . }} {{ end }}<span class="color"> {{ with .Site.Data.pricing.headingSpan }} {{ . }} {{ end }}</span></h2>
+                <div class="border"></div>
+            </div>
+            </div>
+            {{"<!-- /section title -->" | safeHTML}}
+
+            {{ range .Site.Data.pricing.pricingTable }}
+            {{"<!-- single pricing table -->" | safeHTML}}
+            <div style="display: block;
+  margin-right: auto;
+  margin-left: auto;">
+
+            <div class="col-md-4 col-sm-4 text-center wow fadeInUp" data-wow-duration="200ms">
+                <div class="price-item"  style="background-color: #353b43;
+    font-family: anaheim,sans-serif;
+    color: #737f8a;
+    -webkit-font-smoothing: antialiased;">
+
+                    {{"<!-- plan name & value -->" | safeHTML}}
+                    <div class="price-title">
+                        <h3>{{ .title }}</h3>
+                        <p><strong class="value">{{ .price }}</strong></p>
+                    </div>
+
+                    {{"<!-- plan description -->" | safeHTML}}
+                    <ul style="padding-inline-start: 0px; list-style-type:none">
+                        {{ range .plan }}
+                        <li>{{ .planDetails }}</li>
+                        {{ end }}
+                    </ul>
+
+                    {{"<!-- signup button -->" | safeHTML}}
+                    <a class="btn btn-main" href="{{ .btnURL | absURL}}">{{ .btnText }}</a>
+
+                </div>
+            </div>
+            </div>
+            {{"<!-- end single pricing table -->" | safeHTML}}
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{"<!-- /pricing -->" | safeHTML}}
+{{ end }}

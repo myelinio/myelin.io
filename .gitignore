@@ -2,7 +2,6 @@
 .idea/
 .DS_Store
 vendor/
-dist/
 public/
 resources/
 # delve debug binaries
