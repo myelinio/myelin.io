@@ -65,7 +65,8 @@ This post describes how to install *Myelin* on AWS.
 
     In this file the following fields should be provided:
     
-    - **dockerRegistryUrl:** Add the repository url instead of this line, for example use `aws_account_id.dkr.ecr.region.amazonaws.com` for AWS ECR, 
+    - **dockerRegistryUrl:** Add the repository url instead of this line, 
+    for example use `aws_account_id.dkr.ecr.region.amazonaws.com` for AWS ECR, 
     where aws_account_id and and region should be filled in.
     - **dockerSecret.auths.auth:** Auth token. For AWS ECR, this can be generated as follows: `aws ecr get-authorization-token --output text --query 'authorizationData[].authorizationToken'`
     - **dockerSecret.auths.Username:** docker repository user name
