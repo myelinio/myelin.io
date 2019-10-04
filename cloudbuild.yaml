@@ -1,4 +1,3 @@
-
 steps:
 
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -15,15 +14,14 @@ steps:
       - '-c'
       - |
         set -e
-#        apt-get update && apt-get install -y ncftp
         source ftp.sh
-        lftp -f "
+        lftp -f """
         open $$ADDRESS
         user $$USERID $$PASSWORD
         lcd $LCD
         mirror --continue --reverse --delete --verbose public/* /public_html
         bye
-        "
+        """
 
 substitutions:
   _FTP_SECRET_ENC: ci/secrets/ftp.sh.enc
