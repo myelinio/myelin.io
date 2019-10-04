@@ -61,11 +61,13 @@ This post describes how to install *Myelin* on Google Cloud Platform.
 
     - **dockerRegistryUrl:** add the repository url instead of this line, for example use `https://gcr.io`
     for Google Container Registry.
-    - **dockerSecret.auths.auth:** Auth token. To obtain this token for GCP, go to IAM -> [Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts)
-    and create a new key. Then convert this file to a base64 encoded string: `echo -n '_json_key:' | cat - key.json | base64`
+    - **dockerSecret.auths.auth:** Auth token. To obtain this token for GCP, 
+    go to IAM -> [Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts)
+    and create a new key. Then convert this file to a base64 encoded string: 
+    `echo -n '_json_key:' | cat - key.json | base64`
 
     <br/>
-    Enable s3 interoperability for Google Storage [here.](https://console.cloud.google.com/storage/settings) Select
+    Enable s3 interoperability for Google Storage [here.](https://console.cloud.google.com/storage/settings). Select
     the interoperability tab and create a new key, which can be used for the following:
 
     - **artifacts.accesskey:** gcp access key
