@@ -20,6 +20,7 @@ steps:
         set ssl:verify-certificate false
         open $$ADDRESS
         user $$USERID $$PASSWORD
+        cat public/index.html
         mirror --continue --reverse --delete --verbose --parallel=5 --ignore-time public/ /public_html
         bye
         """
