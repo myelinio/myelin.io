@@ -15,9 +15,15 @@ steps:
       - '-c'
       - |
         set -e
-        apt-get update && apt-get install -y ncftp
+#        apt-get update && apt-get install -y ncftp
         source ftp.sh
-        ncftpput -z -R -v -u $$USERID -p $$PASSWORD $$ADDRESS /public_html public/*
+        lftp -f "
+        open $$ADDRESS
+        user $$USERID $$PASSWORD
+        lcd $LCD
+        mirror --continue --reverse --delete --verbose public/* /public_html
+        bye
+        "
 
 substitutions:
   _FTP_SECRET_ENC: ci/secrets/ftp.sh.enc
