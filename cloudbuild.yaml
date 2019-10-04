@@ -18,7 +18,7 @@ steps:
         lftp -f """
         open $$ADDRESS
         user $$USERID $$PASSWORD
-        lcd $LCD
+        lcd public/
         mirror --continue --reverse --delete --verbose public/* /public_html
         bye
         """
