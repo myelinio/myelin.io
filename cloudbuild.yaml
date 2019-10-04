@@ -17,6 +17,7 @@ steps:
         apt-get update && apt-get install -y lftp
         source ftp.sh
         lftp -f """
+        set ssl:verify-certificate false
         open $$ADDRESS
         user $$USERID $$PASSWORD
         mirror --continue --reverse --delete --verbose public/ /public_html
