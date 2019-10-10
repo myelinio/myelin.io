@@ -12,10 +12,23 @@ and explains how to deploy it with *Myelin*.
 
 ### TL;DR
 
-- Install Myelin cli (MacOS)
+- Install Myelin cli
+
+    MacOS installation:
+
     ```bash
     brew tap myelin/cli https://github.com/myelinio/homebrew-cli.git
     brew install myelin
+    ```
+
+    Linux installation:
+
+    ```bash
+    curl -sSL -o /usr/local/bin/myelin https://myelin-cli.storage.googleapis.com/cli-linux/v0.4.0/myelin-linux-amd64
+    chmod +x /usr/local/bin/myelin
+    # Add bash completion
+    apt-get install bash-completion
+    myelin completion bash > /etc/bash_completion.d/myelin
     ```
 
 - Create a new namespace

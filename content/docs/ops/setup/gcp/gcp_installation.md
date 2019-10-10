@@ -151,9 +151,21 @@ This post describes how to install *Myelin* on Google Cloud Platform.
         ```
 7. Install the *Myelin* cli:
 
+    MacOS installation:
+
     ```bash
     brew tap myelin/cli https://github.com/myelinio/homebrew-cli.git
     brew install myelin
+    ```
+
+    Linux installation:
+
+    ```bash
+    curl -sSL -o /usr/local/bin/myelin https://myelin-cli.storage.googleapis.com/cli-linux/v0.4.0/myelin-linux-amd64
+    chmod +x /usr/local/bin/myelin
+    # Add bash completion
+    apt-get install bash-completion
+    myelin completion bash > /etc/bash_completion.d/myelin
     ```
 
 8. Test first Axon:
