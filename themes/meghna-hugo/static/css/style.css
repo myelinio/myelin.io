@@ -1753,7 +1753,7 @@ a:hover {
   Footer section
 ==================================================================*/
 .social-icon {
-  padding: 0px 0 10px;
+  padding: 0px 0 10px 5px;
 }
 
 .social-icon ul {
@@ -1779,6 +1779,7 @@ a:hover {
 }
 
 .social-icon ul li a {
+  text-align: center;
   background-color: #37a3cc;
   border: 1px solid transparent;
   display: block;
@@ -1793,6 +1794,12 @@ a:hover {
   .social-icon ul li a {
     width: 30px;
     height: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .social-icon ul {
+    text-align: left;
   }
 }
 
