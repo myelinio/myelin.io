@@ -86,7 +86,7 @@ custom_css = ["css/custom.css"]
     title = "Would you like to know more?"
     content = ""
     btnURL = "#contact-us"
-    btnText = "Arrange a demo with us"
+    btnText = "Arrange a demo"
 
     # counter
     [params.counter]

@@ -5,7 +5,7 @@ pricingTable :
   - title : Developer
     price : $0
     time : month
-    btnURL : #
+    btnURL : "#contact-us"
     btnText : Request a Demo
     plan :
       - planDetails : 10 Deployed Models
@@ -15,7 +15,7 @@ pricingTable :
   - title : Startup
     price : Contact Us
     time : unlimited
-    btnURL : #
+    btnURL : "#contact-us"
     btnText : Request a Demo
     plan :
       - planDetails : Unlimited Deployed Models
@@ -25,7 +25,7 @@ pricingTable :
   - title : Enterprise
     price : Contact Us
     time : unlimited
-    btnURL : #
+    btnURL : "#contact-us"
     btnText : Request a Demo
     plan :
       - planDetails : Unlimited Deployed Models
