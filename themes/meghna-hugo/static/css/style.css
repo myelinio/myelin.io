@@ -194,6 +194,14 @@ a:hover {
   color: #6CB670;
 }
 
+.name-color {
+  color: #37a3cc;
+}
+
+.copyright-color {
+  color: #737f8a;
+}
+
 .sub-title {
   padding: 0 0 50px;
 }
