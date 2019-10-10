@@ -1753,11 +1753,11 @@ a:hover {
   Footer section
 ==================================================================*/
 .social-icon {
-  padding: 10px 0 35px;
+  padding: 0px 0 10px;
 }
 
 .social-icon ul {
-  text-align: left;
+  text-align: center;
 }
 
 .social-icon ul li {
@@ -1782,8 +1782,8 @@ a:hover {
   background-color: #37a3cc;
   border: 1px solid transparent;
   display: block;
-  height: 35px;
-  width: 35px;
+  height: 50px;
+  width: 50px;
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
   transition: all 400ms ease-out 0s;
@@ -1791,20 +1791,18 @@ a:hover {
 
 @media (max-width: 768px) {
   .social-icon ul li a {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
   }
 }
 
 .social-icon ul li a i {
   color: #0a1922;
   display: inline-block;
-  font-size: 20px;
-  height: 35px;
-  line-height: 35px;
-  width: 23.5px;
+  font-size: 25px;
+  line-height: 50px;
   margin: 0;
-  opacity: 0.6;
+  opacity: 0.3;
   filter: alpha(opacity=30);
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
@@ -1813,10 +1811,8 @@ a:hover {
 
 @media (max-width: 768px) {
   .social-icon ul li a i {
-    font-size: 20px;
-    height: 35px;
-    line-height: 35px;
-    width: 23.5px;
+    line-height: 30px;
+    font-size: 18px;
   }
 }
 
