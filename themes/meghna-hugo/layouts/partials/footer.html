@@ -1,26 +1,29 @@
 {{"<!-- end Contact Area -->" | safeHTML}}
 <footer id="footer" class="bg-one">
 
-				{{"<!-- Footer Social Links -->" | safeHTML}}
-				<div class="social-icon">
-					<ul class="list-inline">
-						{{ range .Site.Params.footer.socialIcon }}
-            <li><a href="{{ .url }}" target="_blank"><i class="{{ .icon }}"></i></a></li>
-						{{ end }}
-					</ul>
-				</div>
+    {{"<!-- Footer Social Links -->" | safeHTML}}
+    <div class="social-icon">
+        <ul class="list-inline">
+            {{ range .Site.Params.footer.socialIcon }}
+                <li><a href="{{ .url }}" target="_blank"><i class="{{ .icon }}"></i></a></li>
+            {{ end }}
+        </ul>
+    </div>
 
-				{{"<!-- copyright -->" | safeHTML}}
-				<div class="copyright">
-					<a href="{{ .Site.BaseURL | absURL }}">
-						<img src="{{ .Site.Params.logo | absURL }}" height="30px" width="115px" />
-					</a>
-					<br>
+    {{"<!-- copyright -->" | safeHTML}}
+    <div class="copyright">
+        <a href="{{ .Site.BaseURL | absURL }}">
+            <img src="{{ .Site.Params.logo | absURL }}" height="30px" width="115px"/>
+        </a>
+        <br>
 
-					<p><a href="{{ .Site.Params.footer.copyrightURL | absURL }}"> {{ with .Site.Params.footer.copyright }} {{ . }} {{ end }} </a> &copy; <script>
-							document.write(new Date().getFullYear())
-						</script>. All Rights Reserved.</p>
-				</div>
+        <p>
+            <a href="{{ .Site.Params.footer.copyrightURL | absURL }}"> {{ with .Site.Params.footer.copyright }} {{ . }} {{ end }} </a>&copy;
+            <script>
+                document.write(new Date().getFullYear())
+            </script>. All Rights Reserved.
+        </p>
+    </div>
 
 </footer>
 {{"<!-- /footer -->" | safeHTML}}
@@ -44,8 +47,8 @@
 {{"<!-- Magnific popup -->" | safeHTML}}
 <script type="text/javascript" src="{{ "plugins/magnific-popup/dist/jquery.magnific-popup.min.js" | absURL}}"></script>
 {{ if .Site.Params.map.enable }}
-{{"<!-- Google Map API -->" | safeHTML}}
-<script type="text/javascript"  src="{{ .Site.Params.maps.gmapAPI | absURL }}"></script>
+    {{"<!-- Google Map API -->" | safeHTML}}
+    <script type="text/javascript" src="{{ .Site.Params.maps.gmapAPI | absURL }}"></script>
 {{ end }}
 {{"<!-- Sticky Nav -->" | safeHTML}}
 <script type="text/javascript" src="{{ "plugins/Sticky/jquery.sticky.js" | absURL}}"></script>
