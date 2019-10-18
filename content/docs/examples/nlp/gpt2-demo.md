@@ -53,7 +53,7 @@ and explains how to deploy it with *Myelin*.
     NAMESPACE=myelin
 
     #Get the proxy name (if only one model is deployed)
-    URL=$(myelin endpoint -n $NAMESPACE ml-gpt2 -o json | jq -r '.fixedUrl')
+    URL=$(myelin endpoint -n $NAMESPACE ml-gpt2 -o json | jq -r '.[0].modelStable.publicUrl')
     PROXY_URL=${URL}predict
 
     DATA='{"data": {"ndarray": ["To be, or not to be: that is the question"]}}'
