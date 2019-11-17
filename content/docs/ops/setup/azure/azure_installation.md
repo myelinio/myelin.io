@@ -39,6 +39,8 @@ This post describes how to install *Myelin* on Azure.
     Create a file `secrets.yaml` with the following content:
 
     ```yaml
+    licence: LICENCE
+
     authenticateDocker:
       enabled: true
     
@@ -63,6 +65,8 @@ This post describes how to install *Myelin* on Azure.
     ```
 
     In this file the following fields should be provided:
+
+    - **licence**: Get a free licence from [here.](https://myelin.io/#licence)
     
     - **dockerRegistryUrl:** add the repository url instead of this line, for example use `registry.hub.docker.com` for docker hub.
     - **dockerSecret.auths.auth:** Auth token. For docker hub it can be generated as follows: `echo -n 'username:password' | base64`

@@ -39,6 +39,8 @@ This post describes how to install *Myelin* on Google Cloud Platform.
     Create a file `secrets.yaml` with the following content:
 
     ```yaml
+    licence: LICENCE
+
     authenticateDocker:
       enabled: true
 
@@ -58,6 +60,8 @@ This post describes how to install *Myelin* on Google Cloud Platform.
       sshPrivateKey: PRIVATE_KEY
       sshPublicKey: PUBLIC_KEY
     ```
+
+    - **licence**: Get a free licence from [here.](https://myelin.io/#licence)
 
     - **dockerRegistryUrl:** add the repository url instead of this line, for example use `https://gcr.io`
     for Google Container Registry.
