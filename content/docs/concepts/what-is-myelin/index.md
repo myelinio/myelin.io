@@ -21,7 +21,7 @@ Myelin aims at helping Data Science teams to deliver digital services.
 Our framework was built around core infrastructure principles:
 
 - **Infrastructure as Code** 
-- **Mutability** 
+- **Immutability** 
 - **Reproducibility** 
 - **Observability** 
 - **Horizontal Scalability** 
