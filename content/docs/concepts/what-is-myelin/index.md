@@ -16,12 +16,12 @@ In a simple case, the desired state might include a single model that is
 trained and deployed, serving accurate predictions. When the model performance drops, 
 Myelin retrains the model and replaces the inaccurate one.
 
-Myelin aims at helping Data Science teams deliver digital services. 
+Myelin aims at helping Data Science teams to deliver digital services. 
 
 Our framework was built around core infrastructure principles:
 
 - **Infrastructure as Code** 
-- **Mutability** 
+- **Immutability** 
 - **Reproducibility** 
 - **Observability** 
 - **Horizontal Scalability** 
@@ -35,9 +35,9 @@ And around Data Science aims:
 
 ## Event Driven Job Scheduling Framework
 
-Myelin offer set of configurable sensors that lister to configured event 
-and triggers a pipeline once an event is fired.
-Event sensors type could be external (REST trigger, Prometheus alert) or 
+Myelin offers a set of configurable sensors that listen to configured events 
+and trigger a pipeline once an event is fired.
+Event sensor types could be external (REST trigger, Prometheus alert) or 
 internal (Calendar, another Task execution lifecyle event,..)
 
 The framework provides additional features:
@@ -55,7 +55,7 @@ Myelin provides tools to run ML models on top of Kubernetes. It also
 allows to configure the provisioned infrastructure and resources. 
 
 ### Hyper-parameter Optimisation
-Myelin models can be tuned using Hyper-parameter optimisation (HPO). The HPO controller implements state-of-the-art algorithms to search for optimal models hyper-parameters.
+Myelin models can be tuned using Hyper-parameter optimisation (HPO). The HPO controller implements state-of-the-art algorithms to search for optimal model hyper-parameters.
 
 Implemented optimisers include [Hyperband](https://arxiv.org/abs/1603.06560) and [BOHB](https://www.automl.org/blog_bohb/):
 
