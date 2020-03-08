@@ -36,10 +36,10 @@ Myelin on GCP marketplace.
 
     ```bash
     kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml"
-	kubectl apply -f "https://raw.githubusercontent.com/coreos/prometheus-operator/master/example/prometheus-operator-crd/alertmanager.crd.yaml"
-	kubectl apply -f "https://raw.githubusercontent.com/coreos/prometheus-operator/master/example/prometheus-operator-crd/prometheus.crd.yaml"
-	kubectl apply -f "https://raw.githubusercontent.com/coreos/prometheus-operator/master/example/prometheus-operator-crd/prometheusrule.crd.yaml"
-	kubectl apply -f "https://raw.githubusercontent.com/coreos/prometheus-operator/master/example/prometheus-operator-crd/servicemonitor.crd.yaml"
+	kubectl apply -f "https://raw.githubusercontent.com/coreos/prometheus-operator/v0.30.1/example/prometheus-operator-crd/alertmanager.crd.yaml"
+	kubectl apply -f "https://raw.githubusercontent.com/coreos/prometheus-operator/v0.30.1/example/prometheus-operator-crd/prometheus.crd.yaml"
+	kubectl apply -f "https://raw.githubusercontent.com/coreos/prometheus-operator/v0.30.1/example/prometheus-operator-crd/prometheusrule.crd.yaml"
+	kubectl apply -f "https://raw.githubusercontent.com/coreos/prometheus-operator/v0.30.1/example/prometheus-operator-crd/servicemonitor.crd.yaml"
 	kubectl apply -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/crd/myelin.axon.crd.yaml"
 	kubectl apply -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/crd/myelin.deployer.crd.yaml"
 	kubectl apply -f "https://raw.githubusercontent.com/myelinio/myelin-gcp-marketplace/master/myelin/crd/myelin.workflow.crd.yaml"
