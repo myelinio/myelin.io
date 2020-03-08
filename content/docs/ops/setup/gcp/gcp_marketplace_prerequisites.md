@@ -10,10 +10,10 @@ Myelin on GCP marketplace.
 1. Create a GKE cluster with Istio enabled:
 
     ```bash
-    gcloud beta container clusters create test2 --preemptible \
+    gcloud beta container clusters create test-cluster --preemptible \
         --addons=Istio --istio-config=auth=MTLS_PERMISSIVE \
         --machine-type=n1-standard-4 --num-nodes=1 --disk-size=30 --issue-client-certificate \
-        --enable-basic-auth --zone=europe-west2-c --cluster-version=1.12.9-gke.16 \
+        --enable-basic-auth --zone=europe-west2-c \
         --image-type=UBUNTU
     ```
 
