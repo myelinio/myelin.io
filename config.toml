@@ -3,6 +3,8 @@ languageCode = "en-us"
 title = "Myelin"
 theme = "meghna-hugo"
 googleAnalytics = "UA-132898010-1"
+enableRobotsTXT = true
+canonifyURLs = true
 
 # Menu
 [menu]
