@@ -63,6 +63,10 @@ canonifyURLs = true
 home= "Home"
 logo = "images/resized-logo.png"
 custom_css = ["css/custom.css"]
+author = "Myelin.io"
+title = "Myelin - machine learning framework"
+description = "Myelin is a Kubernetes native end to end machine learning framework."
+tags = ["myelin", "machine", "learning", "ai", "kubernetes"]
 
     [params.map]
     enable = false
