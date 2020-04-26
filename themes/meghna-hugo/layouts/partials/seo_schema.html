@@ -1,7 +1,45 @@
+<meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}"/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="{{ .Permalink }}" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Home - Myelin" />
+<meta property="og:url" content="https://www.myelin.io/" />
+<meta property="og:site_name" content="Myelin" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="(common content like logos and footer. For tech/exec content, edit the Tech and Exec pages. Home content is pulled from the Tech page.)" />
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}" />
+
+
 <script type="application/ld+json">
+    {{ if .IsHome }}
+
 {
     "@context" : "http://schema.org",
-    "@type" : "Organization",
+    "@graph": [{
+		"@type": "WebSite",
+		"@id": "https://www.myelin.io/#website",
+		"url": "https://www.myelin.io/",
+		"name": "Myelin",
+		"description": "Machine Learning Deployment Platform for Enterprise",
+		"potentialAction": {
+			"@type": "SearchAction",
+			"target": "https://www.myelin.io/?s={search_term_string}",
+			"query-input": "required name=search_term_string"
+		}
+	}, {
+		"@type": "WebPage",
+		"@id": "https://www.myelin.io/#webpage",
+		"url": "https://www.myelin.io/",
+		"inLanguage": "en-US",
+		"name": "Home - Myelin",
+		"isPartOf": {
+			"@id": "https://www.myelin.io/#website"
+		},
+		"datePublished": "2019-05-23T19:56:33+00:00",
+		"dateModified": "2019-11-20T09:59:25+00:00"
+	}],
+    "@type" : "WebSite",
     "mainEntityOfPage": {
          "@type": "WebPage",
          "@id": "{{ .Site.BaseURL }}"
@@ -23,4 +61,20 @@
     "wordCount" : "{{ .WordCount }}",
     "keywords" : ["myelin", "machine", "learning", "ai", "kubernetes", "model", "deployment", "pipeline", "hyperparameter", "tuning" ]
 }
+{{ else}}
+
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "{{ .Permalink }}",
+  "name": "{{ .Title }}",
+   "author": {
+      "@type": "organization",
+      "name": "{{ .Site.Params.author }}"
+    },
+  "description": "{{ .Site.Params.description }}",
+}
+
+{{ end }}
+
 </script>
