@@ -1,10 +1,12 @@
 baseURL = "https://myelin.io/"
 languageCode = "en-us"
-title = "Myelin"
+title = "Myelin - machine learning framework"
 theme = "meghna-hugo"
 googleAnalytics = "UA-132898010-1"
 enableRobotsTXT = true
 canonifyURLs = true
+author = "Myelin.io"
+description = "Myelin is a Kubernetes native end to end machine learning framework."
 
 # Menu
 [menu]
