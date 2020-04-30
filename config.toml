@@ -162,3 +162,6 @@ description = "Myelin is a Kubernetes native end to end machine learning framewo
 [languages]
     [languages.en]
         contentDir = "content"
+
+[Author]
+  name = "Myelin.io"

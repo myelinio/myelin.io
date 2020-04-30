@@ -54,9 +54,9 @@
     "publisher": "{{ range .Site.Author }}{{ . }}{{ end }}",
     "accountablePerson" : "{{ range .Site.Author }}{{ . }}{{ end }}",
     "copyrightHolder" : "{{ range .Site.Author }}{{ . }}{{ end }}",
-    "copyrightYear" : "{{ .Date.Format "2020" }}",
-    "datePublished": "{{ .Date }}",
-    "dateModified" : "{{ .Date }}",
+    "copyrightYear" : "{{ .Date.Format "2006" }}",
+    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05"   }}",
+    "dateModified" : "{{ .Date.Format "2006-01-02T15:04:05"}}",
     "url" : "{{ .Permalink }}",
     "wordCount" : "{{ .WordCount }}",
     "keywords" : ["myelin", "machine", "learning", "ai", "kubernetes", "model", "deployment", "pipeline", "hyperparameter", "tuning" ]
