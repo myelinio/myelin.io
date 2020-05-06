@@ -1,14 +1,30 @@
 <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}"/>
 <meta name="robots" content="noodp"/>
-<link rel="canonical" href="{{ .Permalink }}" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Home - Myelin" />
-<meta property="og:url" content="https://www.myelin.io/" />
-<meta property="og:site_name" content="Myelin" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:description" content="(common content like logos and footer. For tech/exec content, edit the Tech and Exec pages. Home content is pulled from the Tech page.)" />
-<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}" />
+<link rel="canonical" href="{{ .Permalink }}"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Home - Myelin"/>
+<meta property="og:url" content="https://www.myelin.io/"/>
+<meta property="og:site_name" content="Myelin.io"/>
+
+<!-- Open Graph protocol -->
+{{ if .Permalink }}
+    <meta property="og:url" content="{{ .Permalink }}">
+{{ end }}
+<meta property="og:image" content="{{ "images/favicon.ico" | absURL }}">
+<meta property="og:image:alt" content="Myelin Logo">
+<meta property="og:image:width" content="48">
+<meta property="og:image:height" content="48">
+
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@myelinio">
+
+<!-- app manifests -->
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-title" content="Myelin.io">
+<meta name="application-name" content="Myelin.io">
 
 
 <script type="application/ld+json">
@@ -16,30 +32,53 @@
 
 {
     "@context" : "http://schema.org",
-    "@graph": [{
+    "@graph": [
+      {
 		"@type": "WebSite",
-		"@id": "https://www.myelin.io/#website",
-		"url": "https://www.myelin.io/",
-		"name": "Myelin",
+		"@id": "https://www.myelin.io/#about",
+		"url": "https://www.myelin.io/#about",
+		"name": "About Myelin",
 		"description": "Machine Learning Deployment Platform for Enterprise",
 		"potentialAction": {
 			"@type": "SearchAction",
 			"target": "https://www.myelin.io/?s={search_term_string}",
 			"query-input": "required name=search_term_string"
 		}
-	}, {
-		"@type": "WebPage",
-		"@id": "https://www.myelin.io/#webpage",
-		"url": "https://www.myelin.io/",
-		"inLanguage": "en-US",
-		"name": "Home - Myelin",
-		"isPartOf": {
-			"@id": "https://www.myelin.io/#website"
-		},
-		"datePublished": "2019-05-23T19:56:33+00:00",
-		"dateModified": "2019-11-20T09:59:25+00:00"
-	}],
+	  },
+      {
+		"@type": "WebSite",
+		"@id": "https://www.myelin.io/#products",
+		"url": "https://www.myelin.io/#products",
+		"name": "Products",
+		"description": "Myelin Products",
+		"potentialAction": {
+			"@type": "SearchAction",
+			"target": "https://www.myelin.io/?s={search_term_string}",
+			"query-input": "required name=search_term_string"
+		}
+	  },
+      {
+		"@type": "WebSite",
+		"@id": "https://www.myelin.io/#contact-us",
+		"url": "https://www.myelin.io/#contact-us",
+		"name": "Contact Myelin",
+		"description": "Contact Myelin"
+	  },
+    {
+		"@type": "WebSite",
+		"@id": "https://www.myelin.io/docs/",
+		"url": "https://www.myelin.io/docs/",
+		"name": "Docs",
+		"description": "Myelin Docs",
+		"potentialAction": {
+			"@type": "SearchAction",
+			"target": "https://www.myelin.io/?s={search_term_string}",
+			"query-input": "required name=search_term_string"
+		}
+	  }
+    ],
     "@type" : "WebSite",
+    "description" : "{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}",
     "mainEntityOfPage": {
          "@type": "WebPage",
          "@id": "{{ .Site.BaseURL }}"
@@ -47,7 +86,6 @@
     "articleSection" : "{{ .Section }}",
     "name" : "{{ .Title }}",
     "headline" : "{{ .Title }}",
-    "description" : "{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}",
     "inLanguage" : "en-US",
     "author" : "{{ range .Site.Author }}{{ . }}{{ end }}",
     "creator" : "{{ range .Site.Author }}{{ . }}{{ end }}",
@@ -58,23 +96,44 @@
     "datePublished": "{{ .Date.Format "2006-01-02T15:04:05"   }}",
     "dateModified" : "{{ .Date.Format "2006-01-02T15:04:05"}}",
     "url" : "{{ .Permalink }}",
+    "logo": "https://myelin.io/images/favicon.ico",
     "wordCount" : "{{ .WordCount }}",
-    "keywords" : ["myelin", "machine", "learning", "ai", "kubernetes", "model", "deployment", "pipeline", "hyperparameter", "tuning" ]
+    "keywords" : ["myelin", "machine", "learning", "ai", "kubernetes", "model", "deployment", "pipeline", "hyperparameter", "tuning" ],
+    "sameAs": [
+        "https://github.com/myelinio",
+        "https://twitter.com/myelinio"
+    ]
 }
 {{ else}}
 
 {
-  "@context": "http://schema.org",
-  "@type": "WebSite",
-  "url": "{{ .Permalink }}",
-  "name": "{{ .Title }}",
-   "author": {
-      "@type": "organization",
-      "name": "{{ .Site.Params.author }}"
-    },
-  "description": "{{ .Site.Params.description }}",
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "description": "{{ .Title }}"
+    "articleSection" : "{{ .Section }}",
+    "name" : "{{ .Title }}",
+    "headline" : "{{ .Title }}",
+    "inLanguage" : "en-US",
+    "author" : "{{ range .Site.Author }}{{ . }}{{ end }}",
+    "creator" : "{{ range .Site.Author }}{{ . }}{{ end }}",
+    "publisher": "{{ range .Site.Author }}{{ . }}{{ end }}",
+    "accountablePerson" : "{{ range .Site.Author }}{{ . }}{{ end }}",
+    "copyrightHolder" : "{{ range .Site.Author }}{{ . }}{{ end }}",
+    "copyrightYear" : "{{ .Date.Format "2006" }}",
+    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05"   }}",
+    "dateModified" : "{{ .Date.Format "2006-01-02T15:04:05"}}",
+    "url" : "{{ .Permalink }}",
+    "logo": "https://myelin.io/images/favicon.ico",
+    "wordCount" : "{{ .WordCount }}",
+    "keywords" : ["myelin", "machine", "learning", "ai", "kubernetes", "model", "deployment", "pipeline", "hyperparameter", "tuning" ],
+    "sameAs": [
+        "https://github.com/myelinio",
+        "https://twitter.com/myelinio"
+    ]
 }
 
 {{ end }}
+
+
 
 </script>

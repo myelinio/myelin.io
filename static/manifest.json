@@ -1,0 +1,14 @@
+{
+    "name": "Myelin.io ML Framework",
+    "short_name": "Myelin.io",
+    "icons": [
+        {
+            "src": "images/favicon.ico",
+            "sizes": "48x48",
+            "type": "image/ico"
+        }
+    ],
+    "theme_color": "#466BB0",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}

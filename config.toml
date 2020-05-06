@@ -1,12 +1,16 @@
 baseURL = "https://myelin.io/"
 languageCode = "en-us"
-title = "Myelin - machine learning framework"
+title = "Myelin: Home"
 theme = "meghna-hugo"
 googleAnalytics = "UA-132898010-1"
 enableRobotsTXT = true
 canonifyURLs = true
 author = "Myelin.io"
-description = "Myelin is a Kubernetes native end to end machine learning framework."
+description = "Myelin is a Kubernetes native end to end Machine Learning framework."
+
+anchor = "smart"
+enableEmoji = false
+buildFuture = true
 
 # Menu
 [menu]
@@ -66,7 +70,7 @@ home= "Home"
 logo = "images/resized-logo.png"
 custom_css = ["css/custom.css"]
 author = "Myelin.io"
-title = "Myelin - machine learning framework"
+title = "Myelin: Home"
 description = "Myelin is a Kubernetes native end to end machine learning framework."
 #tags = ["myelin", "machine", "learning", "ai", "kubernetes"]
 
