@@ -613,7 +613,7 @@ a:hover {
 
 .hero-area {
   background-size: cover;
-  height: 100vh;
+  height: 70vh;
   position: relative;
   display: flex;
   justify-content: center;
@@ -631,8 +631,9 @@ a:hover {
 }
 
 .hero-area .block {
-  text-align: center;
+  /*text-align: center;*/
   z-index: 99;
+  margin: 100px;
 }
 
 .hero-area .block .video-button {
@@ -651,7 +652,7 @@ a:hover {
 }
 
 .hero-area .block h1 {
-  font-size: 90px;
+  font-size: 60px;
   color: #fff;
   text-transform: capitalize;
   font-weight: 700;
@@ -667,8 +668,8 @@ a:hover {
 .hero-area .block p {
   color: #fff;
   font-size: 27px;
-  width: 70%;
-  margin: 0 auto;
+  width: 50%;
+  /*margin: 0 auto;*/
 }
 
 .hero-area .block .btn-transparent {
@@ -817,6 +818,9 @@ a:hover {
   color: #FFFFFF;
 }
 
+.about-2 .content-block p {
+  font-size: 1rem;
+}
 /*=================================================================
  Call To Action 1
 ==================================================================*/
