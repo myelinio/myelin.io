@@ -1,6 +1,11 @@
 jQuery(function ($) {
     "use strict";
 
+
+    /*
+    Close navigation menu on mobile when clicked
+     */
+
     $(function(){
         var navMain = $(".navbar-collapse"); // avoid dependency on #id
         // "a:not([data-toggle])" - to avoid issues caused
