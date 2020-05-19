@@ -631,9 +631,7 @@ a:hover {
 }
 
 .hero-area .block {
-  /*text-align: center;*/
   z-index: 99;
-  margin: 100px;
 }
 
 .hero-area .block .video-button {
@@ -665,11 +663,15 @@ a:hover {
   }
 }
 
+@media (min-width: 480px) {
+  .hero-area .block p {
+    width: 50%;
+  }
+}
+
 .hero-area .block p {
   color: #fff;
   font-size: 27px;
-  width: 50%;
-  /*margin: 0 auto;*/
 }
 
 .hero-area .block .btn-transparent {
