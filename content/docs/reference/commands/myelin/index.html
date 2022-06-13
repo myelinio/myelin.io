@@ -3,6 +3,8 @@ title: myelin
 description: Myelin control interface.
 generator: pkg-collateral-docs
 number_of_entries: 38
+max_toc_level: 2
+remove_toc_prefix: 'myelin '
 ---
 <p>Myelin configuration command line utility for service operators to
     debug and diagnose their Myelin models.
@@ -32,17 +34,245 @@ number_of_entries: 38
         <td>Kubernetes configuration file (default ``)</td>
     </tr>
     <tr>
-        <td><code>--log_output_level &lt;string&gt;</code></td>
-        <td></td>
-        <td>Comma-separated minimum per-scope logging level of messages to output, in the form of &lt;scope&gt;:&lt;level&gt;,&lt;scope&gt;:&lt;level&gt;,...
-            where scope can be one of [ads, attributes, default, grpcAdapter, kube-converter, mcp, meshconfig, model,
-            rbac] and level can be one of [debug, info, warn, error, fatal, none] (default `default:info`)
-        </td>
-    </tr>
-    <tr>
         <td><code>--namespace &lt;string&gt;</code></td>
         <td><code>-n</code></td>
         <td>Config namespace (default ``)</td>
     </tr>
     </tbody>
 </table>
+
+<h2 id="myelin-list">myelin list</h2>
+<p>A group of commands used to list resources</p>
+<pre class="language-bash"><code>  myelin list [flags]
+</code></pre>
+<table class="command-flags">
+    <thead>
+    <tr>
+        <th>Flags</th>
+        <th>Shorthand</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>--context &lt;string&gt;</code></td>
+        <td></td>
+        <td>The name of the kubeconfig context to use (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--istioNamespace &lt;string&gt;</code></td>
+        <td><code>-i</code></td>
+        <td>Istio system namespace (default `istio-system`)</td>
+    </tr>
+    <tr>
+        <td><code>--kubeconfig &lt;string&gt;</code></td>
+        <td><code>-c</code></td>
+        <td>Kubernetes configuration file (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--namespace &lt;string&gt;</code></td>
+        <td><code>-n</code></td>
+        <td>Config namespace (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--output &lt;string&gt;</code></td>
+        <td><code>-o</code></td>
+        <td>Output format. One of: wide|name (default `wide`)</td>
+    </tr>
+    </tbody>
+</table>
+<h3 id="myelin-list Examples">Examples</h3>
+<pre class="language-bash"><code>  # Retrieve list of axons.
+  myelin list axon
+</code></pre>
+<h2 id="myelin-list-axon">myelin list axon</h2>
+<p>Retrieve list of axons.</p>
+<pre class="language-bash"><code>  myelin list axon [flags]
+</code></pre>
+<table class="command-flags">
+    <thead>
+    <tr>
+        <th>Flags</th>
+        <th>Shorthand</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>--context &lt;string&gt;</code></td>
+        <td></td>
+        <td>The name of the kubeconfig context to use (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--istioNamespace &lt;string&gt;</code></td>
+        <td><code>-i</code></td>
+        <td>Istio system namespace (default `istio-system`)</td>
+    </tr>
+    <tr>
+        <td><code>--kubeconfig &lt;string&gt;</code></td>
+        <td><code>-c</code></td>
+        <td>Kubernetes configuration file (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--namespace &lt;string&gt;</code></td>
+        <td><code>-n</code></td>
+        <td>Config namespace (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--output &lt;string&gt;</code></td>
+        <td><code>-o</code></td>
+        <td>Output format. One of: wide|name (default `wide`)</td>
+    </tr>
+    </tbody>
+</table>
+<h3 id="myelin-list-axon Examples">Examples</h3>
+<pre class="language-bash"><code>  # Retrieve list of axons.
+  myelin list axon
+</code></pre>
+
+
+
+
+<h2 id="myelin-get">myelin get</h2>
+<p>A group of commands used to get resources</p>
+<pre class="language-bash"><code>  myelin get [flags]
+</code></pre>
+<table class="command-flags">
+    <thead>
+    <tr>
+        <th>Flags</th>
+        <th>Shorthand</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>--context &lt;string&gt;</code></td>
+        <td></td>
+        <td>The name of the kubeconfig context to use (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--istioNamespace &lt;string&gt;</code></td>
+        <td><code>-i</code></td>
+        <td>Istio system namespace (default `istio-system`)</td>
+    </tr>
+    <tr>
+        <td><code>--kubeconfig &lt;string&gt;</code></td>
+        <td><code>-c</code></td>
+        <td>Kubernetes configuration file (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--namespace &lt;string&gt;</code></td>
+        <td><code>-n</code></td>
+        <td>Config namespace (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--output &lt;string&gt;</code></td>
+        <td><code>-o</code></td>
+        <td>Output format. One of: name|json|yaml|wide (default `wide`)</td>
+    </tr>
+    </tbody>
+</table>
+<h3 id="myelin-get Examples">Examples</h3>
+<pre class="language-bash"><code>  # Retrieve an axon.
+  myelin get axon recommender-axon
+</code></pre>
+
+<h2 id="myelin-get-axon">myelin get axon</h2>
+<p>Retrieve an axon.</p>
+<pre class="language-bash"><code>  myelin get axon [&lt;axon&gt;] [flags]
+</code></pre>
+<table class="command-flags">
+    <thead>
+    <tr>
+        <th>Flags</th>
+        <th>Shorthand</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>--context &lt;string&gt;</code></td>
+        <td></td>
+        <td>The name of the kubeconfig context to use (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--istioNamespace &lt;string&gt;</code></td>
+        <td><code>-i</code></td>
+        <td>Istio system namespace (default `istio-system`)</td>
+    </tr>
+    <tr>
+        <td><code>--kubeconfig &lt;string&gt;</code></td>
+        <td><code>-c</code></td>
+        <td>Kubernetes configuration file (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--namespace &lt;string&gt;</code></td>
+        <td><code>-n</code></td>
+        <td>Config namespace (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--output &lt;string&gt;</code></td>
+        <td><code>-o</code></td>
+        <td>Output format. One of: name|json|yaml|wide (default `wide`)</td>
+    </tr>
+    </tbody>
+</table>
+<h3 id="myelin-get-axon Examples">Examples</h3>
+<pre class="language-bash"><code>  # Retrieve an axon.
+  myelin get axon recommender-axon
+</code></pre>
+
+
+
+
+<h2 id="myelin-endpoint">myelin endpoint</h2>
+<p>A group of commands used to get axon endpoints</p>
+<pre class="language-bash"><code>  myelin endpoint [&lt;axon&gt;] [flags]
+</code></pre>
+<table class="command-flags">
+    <thead>
+    <tr>
+        <th>Flags</th>
+        <th>Shorthand</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>--context &lt;string&gt;</code></td>
+        <td></td>
+        <td>The name of the kubeconfig context to use (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--istioNamespace &lt;string&gt;</code></td>
+        <td><code>-i</code></td>
+        <td>Istio system namespace (default `istio-system`)</td>
+    </tr>
+    <tr>
+        <td><code>--kubeconfig &lt;string&gt;</code></td>
+        <td><code>-c</code></td>
+        <td>Kubernetes configuration file (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--namespace &lt;string&gt;</code></td>
+        <td><code>-n</code></td>
+        <td>Config namespace (default ``)</td>
+    </tr>
+    <tr>
+        <td><code>--output &lt;string&gt;</code></td>
+        <td><code>-o</code></td>
+        <td>Output format. One of: json|yaml (default `yaml`)</td>
+    </tr>
+    </tbody>
+</table>
+<h3 id="myelin-endpoint Examples">Examples</h3>
+<pre class="language-bash"><code>  # Retrieve an axon endpoint.
+  myelin endpoint axon recommender-axon
+  # Retrieve an axon endpoint selected models fixed urls.
+  myelin endpoint axon recommender-axon -o json |  jq  -r '.[] | .modelStable'.url
+  # Retrieve an axon endpoint selected models versioned urls.
+  myelin endpoint axon recommender-axon -o json | jq  -r '.[] | .models[] | .backends[] | .url'
+  # Retrieve an axon endpoint selected model graphs url.
+  myelin endpoint axon recommender-axon -o json | jq  -r '.[] | .modelProxy'.url
+</code></pre>
