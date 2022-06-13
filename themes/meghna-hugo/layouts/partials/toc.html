@@ -1,4 +1,5 @@
 {{ $page := .page }}
+{{ $custom_headers := .headers }}
 {{ $page.Scratch.Set "needTOC" false }}
 {{ $page.Scratch.Set "seeAlso" false }}
 
@@ -15,8 +16,19 @@
     {{ $page.Scratch.Set "seeAlso" false }}
 {{ end }}
 
+{{ $hdr_types := "23456" }}
+{{ if eq $page.Params.max_toc_level 2 }}
+    {{ $hdr_types = "2" }}
+{{ else if eq $page.Params.max_toc_level 3 }}
+    {{ $hdr_types = "23" }}
+{{ else if eq $page.Params.max_toc_level 4 }}
+    {{ $hdr_types = "234" }}
+{{ else if eq $page.Params.max_toc_level 5 }}
+    {{ $hdr_types = "2345" }}
+{{ end }}
+
 {{ if not $page.Params.skip_toc }}
-    {{ $headers := findRE "<h[23456].*?id=\".*?\".*?>.*?</h[23456]>" $page.Content }}
+    {{ $headers := or ($custom_headers) (findRE (printf "<h[%s].*?id=\".*?\".*?>.*?</h[%s]>" $hdr_types $hdr_types) $page.Content) }}
     {{ $len := len $headers }}
 
     {{ if or (gt $len 0) ($page.Scratch.Get "seeAlso") }}
@@ -25,8 +37,8 @@
             {{ $page.Scratch.Set "level" 50 }}
             {{ range $h := $headers }}
                 {{ $level := index (index (findRE "<h[23456].*?" $h) 0) 2 | int }}
-                {{ $id := replaceRE "<h[23456].*?id=\"(.*?)\".*?>.*?</h[23456]>" "$1" $h }}
-                {{ $title := replaceRE "<h[23456].*?>(.*?)</h[23456]>" "$1" $h }}
+                {{ $id := replaceRE (printf "<h[%s].*?id=\"(.*?)\".*?>.*?</h[%s]>" $hdr_types $hdr_types) "$1" $h }}
+                {{ $title := replaceRE (printf "<h[%s].*?>(.*?)</h[%s]>" $hdr_types $hdr_types) "$1" $h }}
                 {{ $current := $page.Scratch.Get "level" | int }}
 
                 {{ if gt $level $current }}
