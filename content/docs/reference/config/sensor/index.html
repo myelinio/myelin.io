@@ -1,0 +1,1757 @@
+---
+title: sensor
+description: Myelin Sensors Configuration.
+generator: pkg-collateral-docs
+number_of_entries: 38
+max_toc_level: 2
+remove_toc_prefix: 'sensor '
+---
+
+<p>Configuration affecting tasks execution and deployment. Here are a few terms useful to define
+in the context of sensors.</p>
+<p><code>Trigger</code> - a trigger is used to configure an event a sensor listen to.
+.</p>
+<p><code>Task</code> - Task to be executed when the trigger is activated.</p>
+<p><code>ResourceExecutor</code> - A generic task executor.</p>
+<p><code>Trainer</code> - Training task executor.</p>
+<p><code>Deployer</code> - Deployment task executor.</p>
+
+<p>The following example create a sensor for preprocess and train task</p>
+<pre><code class="language-yaml">  sensors:
+    - name: RecommenderTrain
+      triggers:
+        - name: RecommenderTrainTrigger
+          type: Rest
+      tasks:
+        - - resourceExecutor:
+              task: DataPrepTest
+
+        - - trainer:
+              task: RecommenderTrainRF
+
+</code></pre>
+
+<h2 id="VirtualService">Sensor</h2>
+<section>
+<p>Configuration for sensors.</p>
+
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr id="Sensor-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name of the sensor. This name should be unique in the axon.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="Sensor-triggers">
+<td><code>triggers</code></td>
+<td><code><a href="#Trigger">Trigger[]</a></code></td>
+<td>
+<p>The list of triggers. If empty, by default the axon will execute the task only once at axon creation</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="Sensor-conditions">
+<td><code>conditions</code></td>
+<td><code><a href="#Condition">Condition[]</a></code></td>
+<td>
+<p>List of conditions for sensor execution.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="Sensor-sensorTasks">
+<td><code>tasks</code></td>
+<td><code><a href="#SensorTask">SensorTask[][]</a></code></td>
+<td>
+<p>List of sensor tasks for sensor execution.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr id="Sensor-parameters">
+<td><code>parameters</code></td>
+<td><code><a href="#Parameter">Parameter[]</a></code></td>
+<td>
+<p>List of parameters for sensor execution.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+<h2 id="Trigger">Trigger</h2>
+<section>
+<p>Describes sensor trigger.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+<tr id="Trigger-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name of the trigger.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="Trigger-type">
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>
+<p>The type of the trigger. Supported types: Calendar, Rest, Alert, Lifecycle TODO.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="Trigger-condition">
+<td><code>condition</code></td>
+<td><code>string</code></td>
+<td>
+<p>The condition of the trigger.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="Trigger-task">
+<td><code>task</code></td>
+<td><code>string</code></td>
+<td>
+<p>The task of the trigger.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="Condition">Condition</h2>
+<section>
+<p>Describes sensor condition.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="Condition-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name of the condition.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="Condition-type">
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>
+<p>The type of the condition. Supported types: Metric.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="Condition-condition">
+<td><code>condition</code></td>
+<td><code>string</code></td>
+<td>
+<p>The condition of the condition.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="Condition-task">
+<td><code>task</code></td>
+<td><code>string</code></td>
+<td>
+<p>The task of the condition.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+
+</tbody>
+</table>
+</section>
+
+
+
+
+<h2 id="SensorTask">SensorTask</h2>
+<section>
+<p>Describes sensor sensorTask.</p>
+
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+<tr id="SensorTask-resourceExecutor">
+<td><code>resourceExecutor</code></td>
+<td><code><a href="#SensorTaskResourceExecutor">SensorTaskResourceExecutor</a></code></td>
+<td>
+<p>The resourceExecutor to be executed.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+<tr id="SensorTask-trainer">
+<td><code>trainer</code></td>
+<td><code><a href="#SensorTaskTrainer">SensorTaskTrainer</a></code></td>
+<td>
+<p>The trainer to be executed.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+<tr id="SensorTask-deployer">
+<td><code>deployer</code></td>
+<td><code><a href="#SensorTaskDeployer">SensorTaskDeployer</a></code></td>
+<td>
+<p>The deployer to be executed.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+<tr id="SensorTask-env">
+<td><code>env</code></td>
+<td><code><a href="#EnvVar">EnvVar[]</a></code></td>
+<td>
+<p>The env to be added to the task execution runtime.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+</tbody>
+</table>
+</section>
+
+
+
+<h2 id="Parameter">Parameter</h2>
+<section>
+<p>Describes sensor parameter.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="Parameter-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name of the parameter.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="SensorTaskResourceExecutor">SensorTaskResourceExecutor</h2>
+<section>
+<p>Describes sensor sensorTaskResourceExecutor.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="SensorTaskResourceExecutor-task">
+<td><code>task</code></td>
+<td><code>string</code></td>
+<td>
+<p>The task of the sensorTaskResourceExecutor.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="SensorTaskTrainer">SensorTaskTrainer</h2>
+<section>
+<p>Describes sensor sensorTaskTrainer.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="SensorTaskTrainer-task">
+<td><code>task</code></td>
+<td><code>string</code></td>
+<td>
+<p>The task of the sensorTaskTrainer.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="SensorTaskDeployer">SensorTaskDeployer</h2>
+<section>
+<p>Describes sensor sensorTaskDeployer.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="SensorTaskDeployer-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name of the sensorTaskDeployer.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="SensorTaskDeployer-rolloutSpec">
+<td><code>rolloutSpec</code></td>
+<td><code><a href="#RouteSpec">RouteSpec[]</a></code></td>
+<td>
+<p>The rollout specification.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+
+<tr id="SensorTaskDeployer-replicas">
+<td><code>replicas</code></td>
+<td><code>int</code></td>
+<td>
+<p>Replicas.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+<tr id="SensorTaskDeployer-models">
+<td><code>models</code></td>
+<td><code><a href="#ModelSpec">ModelSpec[]</a></code></td>
+<td>
+<p>Models.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+
+<tr id="SensorTaskDeployer-routes">
+<td><code>routes</code></td>
+<td><code><a href="#ModelRoute">ModelRoute[]</a></code></td>
+<td>
+<p>Model routes.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+
+<tr id="SensorTaskDeployer-volumes">
+<td><code>volumes</code></td>
+<td><code>apiv1.Volume[]</code></td>
+<td>
+<p>Volumes.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+
+<tr id="SensorTaskDeployer-securitySpec">
+<td><code>securitySpec</code></td>
+<td><code><a href="#SecuritySpec">SecuritySpec[]</a></code></td>
+<td>
+<p>The security specification.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+<tr id="SensorTaskDeployer-servers">
+<td><code>servers</code></td>
+<td><code><a href="#Server">Server[]</a></code></td>
+<td>
+<p>servers.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+<tr id="SensorTaskDeployer-gateway">
+<td><code>gateway</code></td>
+<td><code>string</code></td>
+<td>
+<p>The gateway specification.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+<tr id="SensorTaskDeployer-gatewayNamespace">
+<td><code>gatewayNamespace</code></td>
+<td><code>string</code></td>
+<td>
+<p>The gatewayNamespace.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="EnvVar">EnvVar</h2>
+<section>
+<p>Describes sensor environment variable.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="EnvVar-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name of the environment variable.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="EnvVar-value">
+<td><code>value</code></td>
+<td><code>string</code></td>
+<td>
+<p>The value of the environment variable.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="RouteSpec">RouteSpec</h2>
+<section>
+<p>Describes specification for model routing.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="RouteSpec-matches">
+<td><code>matches</code></td>
+<td><code><a href="#IstioHTTPMatchRequest">IstioHTTPMatchRequest[]</a></code></td>
+<td>
+<p>The matches for the route.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="RouteSpec-destinations">
+<td><code>destinations</code></td>
+<td><code><a href="#Destination">Destination[]</a></code></td>
+<td>
+<p>The destinations of the route.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+<tr id="RouteSpec-shadows">
+<td><code>shadows</code></td>
+<td><code><a href="#Shadow">Shadow</a></code></td>
+<td>
+<p>The shadow of the route.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="ModelSpec">ModelSpec</h2>
+<section>
+<p>Describes sensor environment variable.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="ModelSpec-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name of the model.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="ModelSpec-routingSpec">
+<td><code>routingStrategy</code></td>
+<td><code><a href="#RouteSpec">RouteSpec[]</a></code></td>
+<td>
+<p>The routing strategy of the model.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="ModelSpec-modelSelectionStrategy">
+<td><code>modelSelectionStrategy</code></td>
+<td><code>string</code></td>
+<td>
+<p>The modelSelectionStrategy of the model.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="ModelSpec-backendModelsSpec">
+<td><code>backendModels</code></td>
+<td><code><a href="#BackendModelSpec">BackendModelSpec[]</a></code></td>
+<td>
+<p>The backend model implementations of the model.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+
+
+<h2 id="BackendModelSpec">BackendModelSpec</h2>
+<section>
+<p>Describes model backend.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+<tr id="BackendModelSpec-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name of the backendModel.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="BackendModelSpec-trainer">
+<td><code>trainer</code></td>
+<td><code>string</code></td>
+<td>
+<p>The trainer of the backendModel.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="BackendModelSpec-deployer">
+<td><code>deployer</code></td>
+<td><code>string</code></td>
+<td>
+<p>The deployer of the backendModel.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="BackendModelSpec-modelSelectionStrategy">
+<td><code>modelSelectionStrategy</code></td>
+<td><code>string</code></td>
+<td>
+<p>The modelSelectionStrategy of the backendModel.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+</tbody>
+</table>
+</section>
+
+
+
+<h2 id="ModelRoute">ModelRoute</h2>
+<section>
+<p>Describes sensor environment variable.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="ModelRoute-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="ModelRoute-value">
+<td><code>value</code></td>
+<td><code>string</code></td>
+<td>
+<p>The value of the environment variable.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="SecuritySpec">SecuritySpec</h2>
+<section>
+<p>Describes security specification of the deployment.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr id="SecuritySpec-jwt">
+<td><code>jwt</code></td>
+<td><code><a href="#Jwt">Jwt</a></code></td>
+<td>
+<p>The jwt specification.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="SecmodetySpec-mode">
+<td><code>mode</code></td>
+<td><code><a href="#ServerTLSSettings-TLSmode">TLSmode</a></code></td>
+<td>
+<p>The TLS mode.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+
+<tr id="SecuritySpec-requestPrincipals">
+<td><code>requestPrincipals</code></td>
+<td><code>string[]</code></td>
+<td>
+<p>The request principals.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="SecuritySpec-meshMTLSMode">
+<td><code>meshMTLSMode</code></td>
+<td><code>string</code></td>
+<td>
+<p>The mesh mTLS Mode.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="Server">Server</h2>
+<section>
+<p>Describes server deployment configuration.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="Server-port">
+<td><code>port</code></td>
+<td><code><a href="#Port">Port</a></code></td>
+<td>
+<p>The port.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="Server-bind">
+<td><code>bind</code></td>
+<td><code>string</code></td>
+<td>
+<p>The bind.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="Server-hosts">
+<td><code>hosts</code></td>
+<td><code>string[]</code></td>
+<td>
+<p>The hosts.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+<tr id="Server-tls">
+<td><code>tls</code></td>
+<td><code><a href="#ServerTLSSettings">ServerTLSSettings</a></code></td>
+<td>
+<p>The tls.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+
+<tr id="Server-defaultEndpoint">
+<td><code>defaultEndpoint</code></td>
+<td><code><a href="#DefaultEndpoint">DefaultEndpoint</a></code></td>
+<td>
+<p>The defaultEndpoint.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="IstioHTTPMatchRequest">IstioHTTPMatchRequest</h2>
+<section>
+<p>Describes routing Istio HTTP Match Request.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="IstioHTTPMatchRequest-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="IstioHTTPMatchRequest-uri">
+<td><code>uri</code></td>
+<td><code><a href="#StringMatch">StringMatch</a></code></td>
+<td>
+<p>The uri of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+
+<tr id="IstioHTTPMatchRequest-scheme">
+<td><code>scheme</code></td>
+<td><code><a href="#StringMatch">StringMatch</a></code></td>
+<td>
+<p>The scheme of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+
+<tr id="IstioHTTPMatchRequest-method">
+<td><code>method</code></td>
+<td><code><a href="#StringMatch">StringMatch</a></code></td>
+<td>
+<p>The method of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+
+<tr id="IstioHTTPMatchRequest-authority">
+<td><code>authority</code></td>
+<td><code><a href="#StringMatch">StringMatch</a></code></td>
+<td>
+<p>The authority of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="IstioHTTPMatchRequest-headers">
+<td><code>headers</code></td>
+<td><code><a href="#StringMatch">map[string]StringMatch</a></code></td>
+<td>
+<p>The headers of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="IstioHTTPMatchRequest-port">
+<td><code>port</code></td>
+<td><code>int</code></td>
+<td>
+<p>The port of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="IstioHTTPMatchRequest-sourceLabels">
+<td><code>sourceLabels</code></td>
+<td><code>map[string]string</code></td>
+<td>
+<p>The sourceLabels of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="IstioHTTPMatchRequest-gateways">
+<td><code>gateways</code></td>
+<td><code>string[]</code></td>
+<td>
+<p>The gateways of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="IstioHTTPMatchRequest-queryParams">
+<td><code>queryParams</code></td>
+<td><code><a href="#StringMatch">map[string]StringMatch</a></code></td>
+<td>
+<p>The queryParams of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="IstioHTTPMatchRequest-ignoreUriCase">
+<td><code>ignoreUriCase</code></td>
+<td><code>boolean</code></td>
+<td>
+<p>The ignoreUriCase of the match.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="Destination">Destination</h2>
+<section>
+<p>Describes routing destination configuration.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="Destination-destinationIndex">
+<td><code>destinationIndex</code></td>
+<td><code>int</code></td>
+<td>
+<p>The destination index.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="Destination-destinationName">
+<td><code>destinationName</code></td>
+<td><code>string</code></td>
+<td>
+<p>The destination name.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="Destination-weight">
+<td><code>weight</code></td>
+<td><code>string</code></td>
+<td>
+<p>The destination weight.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+
+<h2 id="Shadow">Shadow</h2>
+<section>
+<p>Describes shadow routing.</p>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr id="Shadow-destinationIndex">
+<td><code>destinationIndex</code></td>
+<td><code>int</code></td>
+<td>
+<p>The destination index.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="Shadow-destinationName">
+<td><code>destinationName</code></td>
+<td><code>string</code></td>
+<td>
+<p>The destination name.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+<h2 id="ServerTLSSettings">ServerTLSSettings</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr id="ServerTLSSettings-https_redirect">
+<td><code>httpsRedirect</code></td>
+<td><code>bool</code></td>
+<td>
+<p>If set to true, the load balancer will send a 301 redirect for
+all http connections, asking the clients to use HTTPS.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-mode">
+<td><code>mode</code></td>
+<td><code><a href="#ServerTLSSettings-TLSmode">TLSmode</a></code></td>
+<td>
+<p>Optional: Indicates whether connections to this port should be
+secured using TLS. The value of this field determines how TLS is
+enforced.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-server_certificate">
+<td><code>serverCertificate</code></td>
+<td><code>string</code></td>
+<td>
+<p>REQUIRED if mode is <code>SIMPLE</code> or <code>MUTUAL</code>. The path to the file
+holding the server-side TLS certificate to use.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-private_key">
+<td><code>privateKey</code></td>
+<td><code>string</code></td>
+<td>
+<p>REQUIRED if mode is <code>SIMPLE</code> or <code>MUTUAL</code>. The path to the file
+holding the server&rsquo;s private key.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-ca_certificates">
+<td><code>caCertificates</code></td>
+<td><code>string</code></td>
+<td>
+<p>REQUIRED if mode is <code>MUTUAL</code>. The path to a file containing
+certificate authority certificates to use in verifying a presented
+client side certificate.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-credential_name">
+<td><code>credentialName</code></td>
+<td><code>string</code></td>
+<td>
+<p>For gateways running on Kubernetes, the name of the secret that
+holds the TLS certs including the CA certificates. Applicable
+only on Kubernetes. The secret (of type <code>generic</code>) should
+contain the following keys and values: <code>key: &lt;privateKey&gt;</code> and <code>cert: &lt;serverCert&gt;</code>. For mutual TLS,
+<code>cacert: &lt;CACertificate&gt;</code> can be provided in the same secret or
+a separate secret named <code>&lt;secret&gt;-cacert</code>.
+Secret of type tls for server certificates along with
+ca.crt key for CA certificates is also supported.
+Only one of server certificates and CA certificate
+or credentialName can be specified.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-subject_alt_names">
+<td><code>subjectAltNames</code></td>
+<td><code>string[]</code></td>
+<td>
+<p>A list of alternate names to verify the subject identity in the
+certificate presented by the client.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-verify_certificate_spki">
+<td><code>verifyCertificateSpki</code></td>
+<td><code>string[]</code></td>
+<td>
+<p>An optional list of base64-encoded SHA-256 hashes of the SPKIs of
+authorized client certificates.
+Note: When both verify_certificate_hash and verify_certificate_spki
+are specified, a hash matching either value will result in the
+certificate being accepted.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-verify_certificate_hash">
+<td><code>verifyCertificateHash</code></td>
+<td><code>string[]</code></td>
+<td>
+<p>An optional list of hex-encoded SHA-256 hashes of the
+authorized client certificates. Both simple and colon separated
+formats are acceptable.
+Note: When both verify_certificate_hash and verify_certificate_spki
+are specified, a hash matching either value will result in the
+certificate being accepted.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-min_protocol_version">
+<td><code>minProtocolVersion</code></td>
+<td><code><a href="#ServerTLSSettings-TLSProtocol">TLSProtocol</a></code></td>
+<td>
+<p>Optional: Minimum TLS protocol version. By default, it is <code>TLSV1_2</code>.
+TLS protocol versions below TLSV1_2 require setting compatible ciphers with the
+<code>cipherSuites</code> setting as they no longer include compatible ciphers.</p>
+<p>Note: Using TLS protocol versions below TLSV1_2 has serious security risks.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-max_protocol_version">
+<td><code>maxProtocolVersion</code></td>
+<td><code><a href="#ServerTLSSettings-TLSProtocol">TLSProtocol</a></code></td>
+<td>
+<p>Optional: Maximum TLS protocol version.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="ServerTLSSettings-cipher_suites">
+<td><code>cipherSuites</code></td>
+<td><code>string[]</code></td>
+<td>
+<p>Optional: If specified, only support the specified cipher list.
+Otherwise default to the default cipher list supported by Envoy.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="ServerTLSSettings-TLSmode">ServerTLSSettings.TLSmode</h2>
+<section>
+<p>TLS modes enforced by the proxy</p>
+
+<table class="enum-values">
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="ServerTLSSettings-TLSmode-PASSTHROUGH">
+<td><code>PASSTHROUGH</code></td>
+<td>
+<p>The SNI string presented by the client will be used as the
+match criterion in a VirtualService TLS route to determine
+the destination service from the service registry.</p>
+
+</td>
+</tr>
+<tr id="ServerTLSSettings-TLSmode-SIMPLE">
+<td><code>SIMPLE</code></td>
+<td>
+<p>Secure connections with standard TLS semantics.</p>
+
+</td>
+</tr>
+<tr id="ServerTLSSettings-TLSmode-MUTUAL">
+<td><code>MUTUAL</code></td>
+<td>
+<p>Secure connections to the downstream using mutual TLS by
+presenting server certificates for authentication.</p>
+
+</td>
+</tr>
+<tr id="ServerTLSSettings-TLSmode-AUTO_PASSTHROUGH">
+<td><code>AUTO_PASSTHROUGH</code></td>
+<td>
+<p>Similar to the passthrough mode, except servers with this TLS
+mode do not require an associated VirtualService to map from
+the SNI value to service in the registry. The destination
+details such as the service/subset/port are encoded in the
+SNI value. The proxy will forward to the upstream (Envoy)
+cluster (a group of endpoints) specified by the SNI
+value. This server is typically used to provide connectivity
+between services in disparate L3 networks that otherwise do
+not have direct connectivity between their respective
+endpoints. Use of this mode assumes that both the source and
+the destination are using Istio mTLS to secure traffic.</p>
+
+</td>
+</tr>
+<tr id="ServerTLSSettings-TLSmode-ISTIO_MUTUAL">
+<td><code>ISTIO_MUTUAL</code></td>
+<td>
+<p>Secure connections from the downstream using mutual TLS by
+presenting server certificates for authentication.  Compared
+to Mutual mode, this mode uses certificates, representing
+gateway workload identity, generated automatically by Istio
+for mTLS authentication. When this mode is used, all other
+fields in <code>TLSOptions</code> should be empty.</p>
+
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="ServerTLSSettings-TLSProtocol">ServerTLSSettings.TLSProtocol</h2>
+<section>
+<p>TLS protocol versions.</p>
+
+<table class="enum-values">
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="ServerTLSSettings-TLSProtocol-TLS_AUTO">
+<td><code>TLS_AUTO</code></td>
+<td>
+<p>Automatically choose the optimal TLS version.</p>
+
+</td>
+</tr>
+<tr id="ServerTLSSettings-TLSProtocol-TLSV1_0">
+<td><code>TLSV1_0</code></td>
+<td>
+<p>TLS version 1.0</p>
+
+</td>
+</tr>
+<tr id="ServerTLSSettings-TLSProtocol-TLSV1_1">
+<td><code>TLSV1_1</code></td>
+<td>
+<p>TLS version 1.1</p>
+
+</td>
+</tr>
+<tr id="ServerTLSSettings-TLSProtocol-TLSV1_2">
+<td><code>TLSV1_2</code></td>
+<td>
+<p>TLS version 1.2</p>
+
+</td>
+</tr>
+<tr id="ServerTLSSettings-TLSProtocol-TLSV1_3">
+<td><code>TLSV1_3</code></td>
+<td>
+<p>TLS version 1.3</p>
+
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+<h2 id="Jwt">Jwt</h2>
+
+<section>
+<p>JSON Web Token (JWT) token format for authentication as defined by
+<a href="https://tools.ietf.org/html/rfc7519">RFC 7519</a>. See <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0</a> and
+<a href="http://openid.net/connect">OIDC 1.0</a> for how this is used in the whole
+authentication flow.</p>
+<p>Examples:</p>
+<p>Spec for a JWT that is issued by <code>https://example.com</code>, with the audience claims must be either
+<code>bookstore_android.apps.example.com</code> or <code>bookstore_web.apps.example.com</code>.
+The token should be presented at the <code>Authorization</code> header (default). The JSON Web Key Set (JWKS)
+will be discovered following OpenID Connect protocol.</p>
+<pre><code class="language-yaml">issuer: https://example.com
+audiences:
+- bookstore_android.apps.example.com
+  bookstore_web.apps.example.com
+</code></pre>
+<p>This example specifies a token in a non-default location (<code>x-goog-iap-jwt-assertion</code> header). It also
+defines the URI to fetch JWKS explicitly.</p>
+<pre><code class="language-yaml">issuer: https://example.com
+jwksUri: https://example.com/.secret/jwks.json
+fromHeaders:
+- &quot;x-goog-iap-jwt-assertion&quot;
+</code></pre>
+
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr id="Jwt-issuer">
+<td><code>issuer</code></td>
+<td><code>string</code></td>
+<td>
+<p>Identifies the issuer that issued the JWT. See
+<a href="https://tools.ietf.org/html/rfc7519#section-4.1.1">issuer</a>
+A JWT with different <code>iss</code> claim will be rejected.</p>
+<p>Example: <a href="https://foobar.auth0.com">https://foobar.auth0.com</a>
+Example: <a href="mailto:1234567-compute@developer.gserviceaccount.com">1234567-compute@developer.gserviceaccount.com</a></p>
+
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr id="Jwt-audiences">
+<td><code>audiences</code></td>
+<td><code>string[]</code></td>
+<td>
+<p>The list of JWT
+<a href="https://tools.ietf.org/html/rfc7519#section-4.1.3">audiences</a>.
+that are allowed to access. A JWT containing any of these
+audiences will be accepted.</p>
+<p>The service name will be accepted if audiences is empty.</p>
+<p>Example:</p>
+<pre><code class="language-yaml">audiences:
+- bookstore_android.apps.example.com
+  bookstore_web.apps.example.com
+</code></pre>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="Jwt-jwks_uri">
+<td><code>jwksUri</code></td>
+<td><code>string</code></td>
+<td>
+<p>URL of the provider&rsquo;s public key set to validate signature of the
+JWT. See <a href="https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata">OpenID Discovery</a>.</p>
+<p>Optional if the key set document can either (a) be retrieved from
+<a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OpenID
+Discovery</a> of
+the issuer or (b) inferred from the email domain of the issuer (e.g. a
+Google service account).</p>
+<p>Example: <code>https://www.googleapis.com/oauth2/v1/certs</code></p>
+<p>Note: Only one of <code>jwksUri</code> and <code>jwks</code> should be used.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="Jwt-jwks">
+<td><code>jwks</code></td>
+<td><code>string</code></td>
+<td>
+<p>JSON Web Key Set of public keys to validate signature of the JWT.
+See <a href="https://auth0.com/docs/jwks">https://auth0.com/docs/jwks</a>.</p>
+<p>Note: Only one of <code>jwksUri</code> and <code>jwks</code> should be used.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="Jwt-from_headers">
+<td><code>fromHeaders</code></td>
+<td><code><a href="#JWTHeader">JWTHeader[]</a></code></td>
+<td>
+<p>List of header locations from which JWT is expected. For example, below is the location spec
+if JWT is expected to be found in <code>x-jwt-assertion</code> header, and have &ldquo;Bearer &quot; prefix:</p>
+<pre><code class="language-yaml">  fromHeaders:
+  - name: x-jwt-assertion
+    prefix: &quot;Bearer &quot;
+</code></pre>
+<p>Note: Requests with multiple tokens (at different locations) are not supported, the output principal of
+such requests is undefined.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="Jwt-from_params">
+<td><code>fromParams</code></td>
+<td><code>string[]</code></td>
+<td>
+<p>List of query parameters from which JWT is expected. For example, if JWT is provided via query
+parameter <code>my_token</code> (e.g /path?my_token=<JWT>), the config is:</p>
+<pre><code class="language-yaml">  fromParams:
+  - &quot;my_token&quot;
+</code></pre>
+<p>Note: Requests with multiple tokens (at different locations) are not supported, the output principal of
+such requests is undefined.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="Jwt-output_payload_to_header">
+<td><code>outputPayloadToHeader</code></td>
+<td><code>string</code></td>
+<td>
+<p>This field specifies the header name to output a successfully verified JWT payload to the
+backend. The forwarded data is <code>base64_encoded(jwt_payload_in_JSON)</code>. If it is not specified,
+the payload will not be emitted.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="Jwt-forward_original_token">
+<td><code>forwardOriginalToken</code></td>
+<td><code>bool</code></td>
+<td>
+<p>If set to true, the original token will be kept for the upstream request. Default is false.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="JWTHeader">JWTHeader</h2>
+<section>
+<p>This message specifies a header location to extract JWT token.</p>
+
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr id="JWTHeader-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The HTTP header name.</p>
+
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr id="JWTHeader-prefix">
+<td><code>prefix</code></td>
+<td><code>string</code></td>
+<td>
+<p>The prefix that should be stripped before decoding the token.
+For example, for &ldquo;Authorization: Bearer <token>&rdquo;, prefix=&ldquo;Bearer &quot; with a space at the end.
+If the header doesn&rsquo;t have this exact prefix, it is considered invalid.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+<h2 id="Port">Port</h2>
+<section>
+<p>Port describes the properties of a specific port of a service.</p>
+
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr id="Port-number">
+<td><code>number</code></td>
+<td><code>uint32</code></td>
+<td>
+<p>A valid non-negative integer port number.</p>
+
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr id="Port-protocol">
+<td><code>protocol</code></td>
+<td><code>string</code></td>
+<td>
+<p>The protocol exposed on the port.
+MUST BE one of HTTP|HTTPS|GRPC|HTTP2|MONGO|TCP|TLS.
+TLS implies the connection will be routed based on the SNI header to
+the destination without terminating the TLS connection.</p>
+
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr id="Port-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>Label assigned to the port.</p>
+
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr id="Port-target_port">
+<td><code>targetPort</code></td>
+<td><code>uint32</code></td>
+<td>
+<p>The port number on the endpoint where the traffic will be
+received. Applicable only when used with ServiceEntries.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+</tbody>
+</table>
+</section>

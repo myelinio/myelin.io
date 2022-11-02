@@ -1,0 +1,90 @@
+---
+title: task
+description: Myelin Tasks Configuration.
+generator: pkg-collateral-docs
+number_of_entries: 38
+max_toc_level: 2
+remove_toc_prefix: 'task '
+---
+
+<p>Configuration affecting tasks definition.</p>
+<p><code>Task</code> - a task is used to configure a container and its context of execution</p>
+
+<p>The following example create a task a train task</p>
+<pre><code class="language-yaml">  tasks:
+    - name: RecommenderTrainRF
+      train:
+        image: eu.gcr.io/myelin-development/recommender-train-rf:1.0.1
+
+</code></pre>
+
+<h2 id="Task">Task</h2>
+<section>
+<p>Configuration for tasks.</p>
+
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr id="Task-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+<p>The name of the task. This name should be unique in the axon.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+
+<tr id="Task-triggers">
+<td><code>triggers</code></td>
+<td><code><a href="#Trigger">Trigger[]</a></code></td>
+<td>
+<p>The list of triggers. If empty, by default the axon will execute the task only once at axon creation</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+<tr id="Task-conditions">
+<td><code>conditions</code></td>
+<td><code><a href="#Condition">Condition[]</a></code></td>
+<td>
+<p>List of conditions for task execution.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="Task-taskTasks">
+<td><code>tasks</code></td>
+<td><code><a href="#TaskTask">TaskTask[][]</a></code></td>
+<td>
+<p>List of task tasks for task execution.</p>
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr id="Task-parameters">
+<td><code>parameters</code></td>
+<td><code><a href="#Parameter">Parameter[]</a></code></td>
+<td>
+<p>List of parameters for task execution.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+
