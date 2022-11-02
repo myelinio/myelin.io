@@ -43,47 +43,83 @@ Yes
 </td>
 </tr>
 
-<tr id="Task-triggers">
-<td><code>triggers</code></td>
-<td><code><a href="#Trigger">Trigger[]</a></code></td>
+<tr id="Task-container">
+<td><code>container</code></td>
+<td><code><a href="#Container">Container</a></code></td>
 <td>
-<p>The list of triggers. If empty, by default the axon will execute the task only once at axon creation</p>
+<p>The generic container task.</p>
 </td>
 <td>
 No
 </td>
 </tr>
 
-<tr id="Task-conditions">
-<td><code>conditions</code></td>
-<td><code><a href="#Condition">Condition[]</a></code></td>
+<tr id="Task-spark">
+<td><code>spark</code></td>
+<td><code><a href="#Spark">Spark</a></code></td>
 <td>
-<p>List of conditions for task execution.</p>
+<p>List of spark for task execution.</p>
 </td>
 <td>
 No
 </td>
 </tr>
-<tr id="Task-taskTasks">
-<td><code>tasks</code></td>
-<td><code><a href="#TaskTask">TaskTask[][]</a></code></td>
+
+
+<tr id="Task-train">
+<td><code>train</code></td>
+<td><code><a href="#Train">Train</a></code></td>
 <td>
-<p>List of task tasks for task execution.</p>
-</td>
-<td>
-Yes
-</td>
-</tr>
-<tr id="Task-parameters">
-<td><code>parameters</code></td>
-<td><code><a href="#Parameter">Parameter[]</a></code></td>
-<td>
-<p>List of parameters for task execution.</p>
+<p>List of train for task execution.</p>
 </td>
 <td>
 No
 </td>
 </tr>
+
+
+
+
+
+<tr id="Task-deploy">
+<td><code>deploy</code></td>
+<td><code><a href="#Deploy">Deploy</a></code></td>
+<td>
+<p>List of deploy for task execution.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+
+
+<tr id="Task-inputs">
+<td><code>inputs</code></td>
+<td><code><a href="#Inputs">Inputs</a></code></td>
+<td>
+<p>List of inputs for task execution.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
+
+
+
+<tr id="Task-sidecar">
+<td><code>sidecars</code></td>
+<td><code><a href="#Sidecar">Sidecar[]</a></code></td>
+<td>
+<p>List of sidecar for task execution.</p>
+</td>
+<td>
+No
+</td>
+</tr>
+
 </tbody>
 </table>
 </section>
